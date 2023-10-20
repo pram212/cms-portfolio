@@ -1,0 +1,59 @@
+<%- contentFor('title') %>
+Biodata
+
+<%- contentFor('pageTitle') %>
+Biodata
+
+<%- contentFor('body') %>
+<form action="" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center mb-3 bg-light py-3">
+          <img src="ample-admin-template/plugins/images/users/varun.jpg" alt="user-img" width="100" class="img-circle">
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="nama" id="nama" placeholder="" value="<%- data.nama %>">
+              <label for="nama">Nama</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" placeholder="" value="<%- data.tgl_lahir %>">
+              <label for="tgl_lahir">Tanggal lahir</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="tmp_lahir" id="tmp_lahir" placeholder="" value="<%- data.tmp_lahir %>">
+              <label for="tmp_lahir">Tempat lahir</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="profil" id="profil" placeholder="" value="<%- data.profil %>">
+              <label for="profil">Profil</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="lulusan" id="lulusan" placeholder="" value="<%- data.lulusan %>">
+              <label for="lulusan">Lulusan</label>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group mb-3">
+                <label for="tentang">Tentang</label>
+                <textarea type="text" class="form-control" name="tentang" id="tentang" placeholder="" style="height: 100px"><%- data.tentang %></textarea>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center bg-light py-3">
+            <button class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</form>
+
+<%- contentFor('script') %>
+<script>
+    
+</script>
