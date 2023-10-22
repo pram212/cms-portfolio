@@ -18,7 +18,6 @@ async function update(req, res) {
 
     if(req.file) {
         newData.foto = req.file.destination.replace('public', '') + req.file.filename
-        console.log(newData)
     }
 
     await Biodata.findByIdAndUpdate(idToUpdate, newData)
