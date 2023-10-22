@@ -1,4 +1,3 @@
-const flash = require('express-flash')
 const { Biodata } = require('../models/Biodata')
 
 async function index(req, res) {
@@ -26,7 +25,6 @@ async function update(req, res) {
         res.redirect('/biodata')
     })
     .catch(error => {
-        console.log(error)
         req.flash('success', 'Data gagal diupdate!')
         res.redirect('/biodata')
     })
