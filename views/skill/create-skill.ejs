@@ -1,0 +1,41 @@
+<%- contentFor('title') %> Tambah Keahlian 
+<%- contentFor('pageTitle') %> Tambah Keahlian 
+
+<%- contentFor('body') %> 
+
+<% if (message != '') { %>
+<div class="alert alert-primary alert-dismissible fade show" role="alert" style="position: fixed; top: 3%; right: 3%; z-index: 99">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong><%- message %></strong>
+</div>
+<% } %>
+
+<form action="/skill" method="POST">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="skill" id="skill" placeholder="" autofocus value=""/>
+        <label for="skill">Skill</label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="level" id="level" placeholder="" value=""/>
+        <label for="level">Level</label>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center bg-light py-3">
+      <button type="submit" class="btn btn-primary mx-2">Simpan</button>
+      <a href="/skill" class="btn btn-secondary">Kembali</a>
+    </div>
+  </div>
+</form>
+
+<!-- script page -->
+<%- contentFor('script') %>
+<script>
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+</script>
