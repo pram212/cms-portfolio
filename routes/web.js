@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const biodataController = require('../controllers/biodataController')
 const skillController = require('../controllers/skillController')
+const kontakController = require('../controllers/kontakController')
 const multer = require('multer')
 
 // Konfigurasi upload file menggunakan multer
@@ -20,6 +21,9 @@ router.get('/', (req, res) => res.render('home', { layout : 'layouts/main-layout
 
 router.get('/biodata', biodataController.index)
 router.post('/biodata/:id', upload.single('foto'), biodataController.update)
+
+router.get('/kontak', kontakController.index)
+router.post('/kontak/:id', upload.single('foto'), kontakController.update)
 
 router.get('/skill', skillController.index)
 router.get('/skill/create', skillController.create)

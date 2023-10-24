@@ -1,0 +1,68 @@
+
+<%- contentFor('title') %> Kontak 
+
+<%- contentFor('pageTitle') %> Kontak 
+
+<%- contentFor('body') %>
+
+<% if (message != '') { %>
+  <div class="alert alert-primary alert-dismissible fade show" role="alert" style="position: fixed; top: 3%; right: 3%; z-index: 99;">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong><%- message %></strong>
+  </div>
+<% } %>
+
+<form action="/kontak/<%- data._id %>" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="tel" class="form-control" name="telepon" id="telepon" placeholder="" value="<%- data.telepon %>"/>
+        <label for="telepon">No. Whatsapp :</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" name="email" id="email" placeholder="" value="<%- data.email %>"/>
+        <label for="email">Email :</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="linkedin" id="linkedin" placeholder="" value="<%- data.linkedin %>"/>
+        <label for="linkedin">Linkedin :</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="gitlab" id="gitlab" placeholder="" value="<%- data.gitlab %>"/>
+        <label for="gitlab">Gitlab :</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="github" id="github" placeholder="" value="<%- data.github %>"/>
+        <label for="github">Github :</label>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group mb-3">
+        <label for="alamat">Alamat :</label>
+        <textarea type="text" class="form-control" name="alamat" id="alamat" placeholder="" style="height: 100px"><%- data.alamat %></textarea>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-center bg-light py-3">
+      <button class="btn btn-primary">Update</button>
+    </div>
+
+  </div>
+</form>
+
+<!-- script page -->
+<%- contentFor('script') %>
+<script>
+  var alertList = document.querySelectorAll('.alert');
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert)
+  })
+</script>
