@@ -1,0 +1,29 @@
+<table class="table table-sm table-bordered">
+  <thead class="bg-light text-center">
+    <th>Fitur</th>
+    <th width="5%">
+      <button class="btn btn-sm btn-success" id="btn-tambah-modul">
+        <i class="fa fa-plus"></i>
+      </button>
+    </th>
+  </thead>
+  <tbody id="modul-list">
+    <% data.modul.forEach(modul => { %>
+    <tr>
+      <td>
+        <input
+          type="text"
+          name="modul[]"
+          class="form-control form-control-sm"
+          value="<%= modul %>"
+        />
+      </td>
+      <td>
+        <button type="button" class="btn btn-sm btn-danger btn-hapus-modul">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>

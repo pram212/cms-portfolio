@@ -1,0 +1,92 @@
+<%- contentFor('title') %> Keahlian <%- contentFor('pageTitle') %> Keahlian <%-
+contentFor('body') %> 
+<% if (message !='' ) { %>
+<div
+  class="alert alert-primary alert-dismissible fade show"
+  role="alert"
+  style="position: fixed; top: 3%; right: 3%; z-index: 99"
+>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+  <strong><%- message %></strong>
+</div>
+<% } %>
+
+<a href="/pengalaman/create" class="btn btn-primary mb-3">Tambah</a>
+<table class="table table-sm">
+  <thead class="text-center bg-light">
+    <th>Perusahaan</th>
+    <th>Mulai</th>
+    <th>Selesai</th>
+    <th>Lokasi</th>
+    <th>Opsi</th>
+  </thead>
+  <tbody id="oke">
+    <% data.forEach(pengalaman=> { %>
+    <tr>
+      <td><%= pengalaman.perusahaan %></td>
+      <td><%= pengalaman.mulai %></td>
+      <td><%= pengalaman.selesai %></td>
+      <td><%= pengalaman.lokasi %></td>
+      <td class="d-flex justify-content-center">
+        <a href="/pengalaman/<%= pengalaman._id %>/edit" class="btn btn-info mx-2"
+          >Detail</a
+        >
+        <button
+          type="button"
+          class="btn btn-danger btn-hapus"
+          id="<%= pengalaman._id %>"
+        >
+          Hapus
+        </button>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<!-- script page -->
+<%- contentFor('script') %>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+  $(".btn-hapus").click(function (e) {
+    e.preventDefault();
+    idSkill = e.target.id;
+    Swal.fire({
+      title: "Apakah kamu yakin ingin menghapusnya?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`/pengalaman/${idSkill}`)
+          .then(function (response) {
+
+            Swal.fire({ icon: "success", text: response.data });
+
+            setTimeout(() => {
+              location.reload()
+            }, 1000);
+
+          })
+          .catch(function (error) {
+            Swal.fire({ icon: "success", text: error.response.data });
+          });
+       
+      } else if (result.isDenied) {
+        Swal.fire("Data are not deleted", "", "info");
+      }
+    });
+  });
+
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+
+</script>

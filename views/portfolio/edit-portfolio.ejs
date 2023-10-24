@@ -1,0 +1,114 @@
+<%- contentFor('title') %> Detail Portfolio 
+
+<%- contentFor('pageTitle') %> Detail Portfolio 
+
+<%- contentFor('body') %> 
+
+<% if (message != '') { %>
+<div class="alert alert-primary alert-dismissible fade show" role="alert" style="position: fixed; top: 3%; right: 3%; z-index: 99">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong><%- message %></strong>
+</div>
+<% } %>
+
+<form action="/portfolio/<%= data._id %>/update" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="nama" id="nama" placeholder="" value="<%= data.nama %>"/>
+        <label for="nama">Nama Apliksai</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="role" id="role" placeholder="" value="<%= data.role %>"/>
+        <label for="role">Role</label>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-floating mb-3">
+        <textarea class="form-control" name="deskripsi" id="deskripsi"><%= data.deskripsi %></textarea>
+        <label for="deskripsi">Deskripsi</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-floating mb-2">
+        <input type="text" name="demo_url" id="demo_url" class="form-control" value="<%= data.demo_url %>">
+        <label for="demo_url">Demo Url</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-floating mb-2">
+        <textarea class="form-control" name="demo_info" id="demo_info" cols="30" rows="10"><%= data.demo_info %></textarea>
+        <label for="Info" class="form-label">Info Demo</label>
+      </div>
+    </div>
+
+    <div class="col-md-6 bg-light py-2">
+      <%- include('./partials/tech-table') %>
+    </div>
+
+    <div class="col-md-6 bg-light py-2">
+      <%- include('./partials/modul-table') %>
+    </div>
+
+    <div class="col-12 d-flex justify-content-center bg-light py-3">
+      <button type="submit" class="btn btn-primary mx-2">Simpan</button>
+      <a href="/portfolio" class="btn btn-secondary">Kembali</a>
+    </div>
+
+  </div>
+</form>
+
+<!-- script page -->
+<%- contentFor('script') %>
+<script>
+
+  // Menggunakan event delegation untuk menangani event btn-hapus
+  $("#tech-list").on("click", ".btn-hapus-tech", function(e) {
+      e.preventDefault();
+      $(this).closest('tr').remove();
+  });
+
+  $("#btn-tambah-tech").click(function (e) { 
+    e.preventDefault();
+    $("#tech-list").prepend(`
+      <tr>
+        <td>
+          <input type="text" name="teknologi[]" autofocus class="form-control form-control-sm" value="">  
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-danger btn-hapus-tech"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `);
+  });
+
+  // Menggunakan event delegation untuk menangani event btn-hapus
+  $("#modul-list").on("click", ".btn-hapus-modul", function(e) {
+      e.preventDefault();
+      $(this).closest('tr').remove();
+  });
+
+  $("#btn-tambah-modul").click(function (e) { 
+    e.preventDefault();
+    $("#modul-list").prepend(`
+      <tr>
+        <td>
+          <input type="text" name="teknologi[]" autofocus class="form-control form-control-sm" value="">  
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-danger btn-hapus-modul"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `);
+  });
+
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+
+</script>
