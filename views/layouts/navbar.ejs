@@ -44,10 +44,11 @@
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
                 <li>
-                    <a class="profile-pic" href="#">
+                    <a class="profile-pic" href="#" onclick="logout()">
                         <i class="fa fa-power-off" aria-hidden="true"></i>
                         <span class="mx-2 text-white font-medium">Logout</span>
                     </a>
+                    <form action="/auth/logout" method="post" id="form-logout" style="display: none;"></form>
                 </li>
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
@@ -56,3 +57,9 @@
         </div>
     </nav>
 </header>
+
+<script>
+    function logout() {
+        $("#form-logout").submit();
+    }
+</script>

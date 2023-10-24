@@ -1,19 +1,26 @@
-const express = require('express')
-const expressLayouts = require('express-ejs-layouts')
-const bodyParser = require('body-parser')
-const ejs = require('ejs')
 require('dotenv').config()
-const session = require('express-session') 
+
+const ejs = require('ejs')
+const express = require('express')
 const flash = require('connect-flash')
+const bodyParser = require('body-parser')
+const session = require('express-session') 
+const cookieParser = require('cookie-parser');
+const auth = require('./middleware/authMiddleware')
+const guest = require('./middleware/guestMiddleware')
+const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
 
+// setup sessions and cookies
+app.use(cookieParser())
 app.use(session({ 
     secret:'geeksforgeeks', 
     saveUninitialized: true, 
     resave: true
 })) 
   
+// use flash for message
 app.use(flash()) 
 
 // Setup Templating Engine
@@ -25,9 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 // Load Routes
+const authRoutes = require('./routes/auth')
 const webRoutes = require('./routes/web')
-const { default: Swal } = require('sweetalert2')
-app.use('/', webRoutes)
+
+app.use('/auth', authRoutes)
+app.use('/', auth, webRoutes)
 
 // Server
 const PORT = process.env.PORT || 3000

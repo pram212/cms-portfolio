@@ -1,0 +1,36 @@
+<% if (message !='' ) { %>
+<div
+  class="alert alert-primary alert-dismissible fade show"
+  role="alert"
+  style="position: fixed; top: 3%; right: 3%; z-index: 99"
+>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+  <strong><%- message %></strong>
+</div>
+<% } %>
+
+<div class="error-box">
+  <div class="error-body text-center d-flex justify-content-center">
+    <form action="/auth/login" class="w-50" method="post">
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" name="pin" id="pin" placeholder="">
+        <label for="pin">Masukan PIN</label>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+</script>
