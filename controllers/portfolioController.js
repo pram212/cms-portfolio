@@ -41,17 +41,30 @@ async function edit(req, res) {
 async function update(req, res) {
     const idToUpdate = req.params.id
     const newData = req.body
-    
-    await Portfolio.findByIdAndUpdate(idToUpdate, newData)
-    .then( result => {
-        
-        req.flash('message', 'Data berhasil diubah!!')
-        res.redirect('/portfolio/' + idToUpdate + '/edit')
-    })
-    .catch(error => {
-        req.flash('success', 'Data gagal diubah!')
-        res.redirect('/portfolio/' + idToUpdate + '/edit')
-    })
+    let image_urls = null
+    if(req.files) {
+        newImage = []
+        req.files.forEach(item => {
+            const path = item.destination.replace('public', '') + item.filename
+            newImage.push(path)
+        });
+        image_urls = newImage
+    } else {
+        image_urls = await Portfolio.findById(idToUpdate).image_url
+    }
+
+    res.send(image_urls)
+
+    // await Portfolio.findByIdAndUpdate(idToUpdate, newData)
+    // .then( result => {
+    //     req.flash('message', 'Data berhasil diubah!!')
+    //     res.redirect('/portfolio/' + idToUpdate + '/edit')
+    // })
+    // .catch(error => {
+    //     req.flash('success', 'Data gagal diubah!')
+    //     res.redirect('/portfolio/' + idToUpdate + '/edit')
+    // })
+
 }
 
 async function destroy(req, res) {

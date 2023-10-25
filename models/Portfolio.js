@@ -8,6 +8,7 @@ const Schema = new mongoose.Schema({
     klien: { type: String, required: true },
     role: { type: String, required: true },
     deskripsi: { type: String, required: true },
+    kategori: { type: String, required: true },
     demo_url: { type: String, required: true },
     demo_info: { type: String, required: true },
     modul: [{
@@ -15,6 +16,10 @@ const Schema = new mongoose.Schema({
         trim: true, // Menghapus spasi kosong dari awal dan akhir string
     }],
     teknologi: [{
+        type: String, // Tipe elemen array adalah string
+        trim: true, // Menghapus spasi kosong dari awal dan akhir string
+    }],
+    image_url: [{
         type: String, // Tipe elemen array adalah string
         trim: true, // Menghapus spasi kosong dari awal dan akhir string
     }],

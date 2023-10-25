@@ -27,7 +27,7 @@ router.post('/biodata/:id', upload.single('foto'), biodataController.update)
 
 // kontak routes
 router.get('/kontak', kontakController.index)
-router.post('/kontak/:id', upload.single('foto'), kontakController.update)
+router.post('/kontak/:id', kontakController.update)
 
 // skill routes
 router.get('/skill', skillController.index)
@@ -47,10 +47,10 @@ router.delete('/pengalaman/:id', pengalamanController.destroy)
 
 // portfolio routes
 router.get('/portfolio', portfolioController.index)
-router.get('/portfolio/create', portfolioController.create)
+router.get('/portfolio/create', upload.array('gambar'), portfolioController.create)
 router.post('/portfolio', portfolioController.store)
 router.get('/portfolio/:id/edit', portfolioController.edit)
-router.post('/portfolio/:id/update', portfolioController.update)
+router.post('/portfolio/:id/update', upload.array('gambar'), portfolioController.update)
 router.delete('/portfolio/:id', portfolioController.destroy)
 
 router.use( (req, res) => res.render("errors/404", { layout: 'errors/error-layout'}) )

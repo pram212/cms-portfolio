@@ -11,8 +11,25 @@
 </div>
 <% } %>
 
-<form action="/portfolio/<%= data._id %>/update" method="post">
+<form action="/portfolio/<%= data._id %>/update" method="post" enctype="multipart/form-data">
   <div class="row">
+    <div class="col-md-12 bg-light mb-3">
+      <div class="row m-2">
+        <% data.image_url.forEach(path => { %>
+          <div class="col-4 text-center">
+            <img src="<%= path %>" class="img-thumbnail rounded-top" alt="preview aplikasi" style="height: 150px;">
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    
+    <div class="col-md-12">
+      <div class="form-group mb-3">
+        <label for="gambar">Upload Gambar Preview</label>
+        <input type="file" class="form-control" name="gambar" id="gambar" multiple/>
+      </div>
+    </div>
+
     <div class="col-md-6">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" name="nama" id="nama" placeholder="" value="<%= data.nama %>"/>
@@ -23,6 +40,12 @@
       <div class="form-floating mb-3">
         <input type="text" class="form-control" name="role" id="role" placeholder="" value="<%= data.role %>"/>
         <label for="role">Role</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="kategori" id="kategori" placeholder="" value="<%= data.kategori %>"/>
+        <label for="kategori">Kategori</label>
       </div>
     </div>
     <div class="col-md-12">

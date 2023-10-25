@@ -11,7 +11,7 @@ const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
 
-// setup sessions and cookies
+// Setup sessions and cookies
 app.use(cookieParser())
 app.use(session({ 
     secret:'geeksforgeeks', 
@@ -19,7 +19,7 @@ app.use(session({
     resave: true
 })) 
   
-// use flash for message
+// Use flash for message
 app.use(flash()) 
 
 // Setup Templating Engine
@@ -33,7 +33,9 @@ app.use(express.static('public'))
 // Load Routes
 const authRoutes = require('./routes/auth')
 const webRoutes = require('./routes/web')
+const apiRoutes = require('./routes/api')
 
+app.use('/api', apiRoutes)
 app.use('/auth', authRoutes)
 app.use('/', auth, webRoutes)
 
