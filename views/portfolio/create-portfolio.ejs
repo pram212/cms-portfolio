@@ -1,6 +1,6 @@
-<%- contentFor('title') %> Detail Pengalaman 
+<%- contentFor('title') %> Tambah Portfolio 
 
-<%- contentFor('pageTitle') %> Detail Pengalaman 
+<%- contentFor('pageTitle') %> Tambah Portfolio 
 
 <%- contentFor('body') %> 
 
@@ -11,51 +11,103 @@
 </div>
 <% } %>
 
-<form action="/pengalaman" method="post">
+<% if ( errors != '') { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position: fixed; top: 15%; right: 3%; z-index: 99">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Data gagal disimpan :</strong>
+    <% errors.forEach(element => { %>
+      <small class="d-block"><%= element['nama'] %></small>
+      <small class="d-block"><%= element['role'] %></small>
+      <small class="d-block"><%= element['deskripsi'] %></small>
+      <small class="d-block"><%= element['kategori'] %></small>
+    <% }) %>
+  </div>
+<% } %>
+
+<form action="/portfolio" method="post" enctype="multipart/form-data">
   <div class="row">
+    <div class="col-md-12">
+      <div class="form-group mb-3">
+        <label for="gambar">Upload Gambar Preview</label>
+        <input type="file" class="form-control" name="gambar" id="gambar" multiple/>
+      </div>
+    </div>
+
     <div class="col-md-6">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder="" value=""/>
-        <label for="perusahaan">Nama Perusahaan</label>
+        <input type="text" class="form-control" name="nama" id="nama" placeholder="" />
+        <label for="nama">Nama Apliksai</label>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="lokasi" id="lokasi" placeholder="" value=""/>
-        <label for="lokasi">Lokasi</label>
+        <input type="text" class="form-control" name="role" id="role" placeholder=""/>
+        <label for="role">Role</label>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="mulai" id="mulai" placeholder="" value=""/>
-        <label for="mulai">Mulai</label>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="selesai" id="selesai" placeholder="" value=""/>
-        <label for="selesai">Selesai</label>
+        <input type="text" class="form-control" name="kategori" id="kategori" placeholder=""/>
+        <label for="kategori">Kategori</label>
       </div>
     </div>
     <div class="col-md-12">
+      <div class="form-floating mb-3">
+        <textarea class="form-control" name="deskripsi" id="deskripsi"></textarea>
+        <label for="deskripsi">Deskripsi</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-floating mb-2">
+        <input type="text" name="demo_url" id="demo_url" class="form-control" >
+        <label for="demo_url">Demo Url</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-floating mb-2">
+        <textarea class="form-control" name="demo_info" id="demo_info" cols="30" rows="10"></textarea>
+        <label for="Info" class="form-label">Info Demo</label>
+      </div>
+    </div>
+
+    <div class="col-md-6 bg-light py-2">
       <table class="table table-sm table-bordered">
         <thead class="bg-light text-center">
-          <th>Job Description</th>
+          <th>Programming</th>
           <th width="5%">
-            <button class="btn btn-sm btn-success" id="btn-tambah">
+            <button class="btn btn-sm btn-success" id="btn-tambah-tech">
               <i class="fa fa-plus"></i>
             </button>
           </th>
         </thead>
-        <tbody id="jobdesc-list">
+        <tbody id="tech-list">
           
         </tbody>
       </table>
       
     </div>
+
+    <div class="col-md-6 bg-light py-2">
+      <table class="table table-sm table-bordered">
+        <thead class="bg-light text-center">
+          <th>Fitur</th>
+          <th width="5%">
+            <button class="btn btn-sm btn-success" id="btn-tambah-modul">
+              <i class="fa fa-plus"></i>
+            </button>
+          </th>
+        </thead>
+        <tbody id="modul-list">
+
+        </tbody>
+      </table>
+    </div>
+
     <div class="col-12 d-flex justify-content-center bg-light py-3">
       <button type="submit" class="btn btn-primary mx-2">Simpan</button>
-      <a href="/pengalaman" class="btn btn-secondary">Kembali</a>
+      <a href="/portfolio" class="btn btn-secondary">Kembali</a>
     </div>
 
   </div>
@@ -66,20 +118,40 @@
 <script>
 
   // Menggunakan event delegation untuk menangani event btn-hapus
-  $("#jobdesc-list").on("click", ".btn-hapus", function(e) {
+  $("#tech-list").on("click", ".btn-hapus-tech", function(e) {
       e.preventDefault();
       $(this).closest('tr').remove();
   });
 
-  $("#btn-tambah").click(function (e) { 
+  $("#btn-tambah-tech").click(function (e) { 
     e.preventDefault();
-    $("#jobdesc-list").prepend(`
+    $("#tech-list").append(`
       <tr>
         <td>
-          <input type="text" name="jobdesk[]" autofocus class="form-control form-control-sm" value="">  
+          <input type="text" name="teknologi[]" autofocus class="form-control form-control-sm" value="">  
         </td>
         <td>
-          <button type="button" class="btn btn-sm btn-danger btn-hapus"><i class="fa fa-trash"></i></button>
+          <button type="button" class="btn btn-sm btn-danger btn-hapus-tech"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `);
+  });
+
+  // Menggunakan event delegation untuk menangani event btn-hapus
+  $("#modul-list").on("click", ".btn-hapus-modul", function(e) {
+      e.preventDefault();
+      $(this).closest('tr').remove();
+  });
+
+  $("#btn-tambah-modul").click(function (e) { 
+    e.preventDefault();
+    $("#modul-list").append(`
+      <tr>
+        <td>
+          <input type="text" name="modul[]" autofocus class="form-control form-control-sm" value="">  
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-danger btn-hapus-modul"><i class="fa fa-trash"></i></button>
         </td>
       </tr>
     `);

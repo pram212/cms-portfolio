@@ -1,0 +1,93 @@
+<%- contentFor('title') %> Detail Portofolio 
+
+<%- contentFor('pageTitle') %> Detail Portofolio 
+
+<%- contentFor('body') %> 
+
+<% if (message != '') { %>
+<div class="alert alert-primary alert-dismissible fade show" role="alert" style="position: fixed; top: 3%; right: 3%; z-index: 99">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong><%- message %></strong>
+</div>
+<% } %>
+
+<form action="/pengalaman" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder="" value=""/>
+        <label for="perusahaan">Nama Perusahaan</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="lokasi" id="lokasi" placeholder="" value=""/>
+        <label for="lokasi">Lokasi</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="mulai" id="mulai" placeholder="" value=""/>
+        <label for="mulai">Mulai</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="selesai" id="selesai" placeholder="" value=""/>
+        <label for="selesai">Selesai</label>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <table class="table table-sm table-bordered">
+        <thead class="bg-light text-center">
+          <th>Job Description</th>
+          <th width="5%">
+            <button class="btn btn-sm btn-success" id="btn-tambah">
+              <i class="fa fa-plus"></i>
+            </button>
+          </th>
+        </thead>
+        <tbody id="jobdesc-list">
+          
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="col-12 d-flex justify-content-center bg-light py-3">
+      <button type="submit" class="btn btn-primary mx-2">Simpan</button>
+      <a href="/pengalaman" class="btn btn-secondary">Kembali</a>
+    </div>
+
+  </div>
+</form>
+
+<!-- script page -->
+<%- contentFor('script') %>
+<script>
+
+  // Menggunakan event delegation untuk menangani event btn-hapus
+  $("#jobdesc-list").on("click", ".btn-hapus", function(e) {
+      e.preventDefault();
+      $(this).closest('tr').remove();
+  });
+
+  $("#btn-tambah").click(function (e) { 
+    e.preventDefault();
+    $("#jobdesc-list").prepend(`
+      <tr>
+        <td>
+          <input type="text" name="jobdesk[]" autofocus class="form-control form-control-sm" value="">  
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-danger btn-hapus"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    `);
+  });
+
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+
+</script>

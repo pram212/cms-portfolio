@@ -13,19 +13,39 @@ async function index(req, res) {
 
 async function create(req, res) {
     const message = req.flash('message')
-    res.render('portfolio/create-portfolio', { message,  layout: 'layouts/main-layout'})
+    const errors = req.flash('errors')
+    res.render('portfolio/create-portfolio', { message, errors, layout: 'layouts/main-layout'})
 }
 
 async function store(req, res) {
     const newData = req.body
-    await Portfolio.create(req.body)
+
+    if(req.files) {
+        newImage = []
+        req.files.forEach(item => {
+            const path = item.destination.replace('public', '') + item.filename
+            newImage.push(path)
+        });
+        newData.image_url = newImage
+    }
+
+    await Portfolio.create(newData)
     .then(result => {
         req.flash('message', 'Data berhasil ditambahkan!!')
-        res.redirect('/portfolio/create')
+        res.redirect('back')
     })
     .catch(error => {
-        req.flash('message', 'Data gagal ditambahkan!!')
-        res.redirect('/portfolio/create')
+        console.log(error)
+        if (error.name === 'ValidationError') {
+            const validationErrors = {}
+            for (const key in error.errors) {
+                validationErrors[key] = error.errors[key].message;
+            }
+            req.flash('errors', validationErrors);
+        } else {
+            req.flash('message', 'Terjadi kesalahan saat menambahkan data!!');
+        }  
+        res.redirect('back')
     })
 }
 
@@ -42,28 +62,27 @@ async function update(req, res) {
     const idToUpdate = req.params.id
     const newData = req.body
     let image_urls = null
-    if(req.files) {
+    if(req.files.length > 0) {
         newImage = []
         req.files.forEach(item => {
             const path = item.destination.replace('public', '') + item.filename
             newImage.push(path)
         });
-        image_urls = newImage
+        newData.image_url = newImage
     } else {
-        image_urls = await Portfolio.findById(idToUpdate).image_url
+        const oldData = await Portfolio.findById(idToUpdate)
+        newData.image_url = oldData.image_url
     }
 
-    res.send(image_urls)
-
-    // await Portfolio.findByIdAndUpdate(idToUpdate, newData)
-    // .then( result => {
-    //     req.flash('message', 'Data berhasil diubah!!')
-    //     res.redirect('/portfolio/' + idToUpdate + '/edit')
-    // })
-    // .catch(error => {
-    //     req.flash('success', 'Data gagal diubah!')
-    //     res.redirect('/portfolio/' + idToUpdate + '/edit')
-    // })
+    await Portfolio.findByIdAndUpdate(idToUpdate, newData)
+    .then( result => {
+        req.flash('message', 'Data berhasil diubah!!')
+        res.redirect('back')
+    })
+    .catch(error => {
+        req.flash('success', 'Data gagal diubah!')
+        res.redirect('back')
+    })
 
 }
 

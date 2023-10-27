@@ -4,13 +4,12 @@ useMongoDb()
 
 // schema atau struktur  data (laravel: database schema)
 const Schema = new mongoose.Schema({
-    nama: { type: String, required: true },
-    klien: { type: String, required: true },
-    role: { type: String, required: true },
-    deskripsi: { type: String, required: true },
-    kategori: { type: String, required: true },
-    demo_url: { type: String, required: true },
-    demo_info: { type: String, required: true },
+    nama: { type: String, required: [true, 'nama aplikasi wajib diisi'] },
+    role: { type: String, required: [true, 'role wajib diisi'] },
+    deskripsi: { type: String, required: [true, 'deskripsi wajib diisi'] },
+    kategori: { type: String, required: [true, 'kategori wajib diisi'] },
+    demo_url: { type: String, required: false },
+    demo_info: { type: String, required: false },
     modul: [{
         type: String, // Tipe elemen array adalah string
         trim: true, // Menghapus spasi kosong dari awal dan akhir string

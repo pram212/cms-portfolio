@@ -97,7 +97,7 @@
 
   $("#btn-tambah-tech").click(function (e) { 
     e.preventDefault();
-    $("#tech-list").prepend(`
+    $("#tech-list").append(`
       <tr>
         <td>
           <input type="text" name="teknologi[]" autofocus class="form-control form-control-sm" value="">  
@@ -117,10 +117,10 @@
 
   $("#btn-tambah-modul").click(function (e) { 
     e.preventDefault();
-    $("#modul-list").prepend(`
+    $("#modul-list").append(`
       <tr>
         <td>
-          <input type="text" name="teknologi[]" autofocus class="form-control form-control-sm" value="">  
+          <input type="text" name="modul[]" autofocus class="form-control form-control-sm" value="">  
         </td>
         <td>
           <button type="button" class="btn btn-sm btn-danger btn-hapus-modul"><i class="fa fa-trash"></i></button>
