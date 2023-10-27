@@ -3,10 +3,10 @@ const { Biodata } = require('../../models/Biodata')
 async function index(req, res) {
     await Biodata.findOne()
     .then( data => {
-        res.send(data)
+        res.json(data)
     })
     .catch(error => {
-        res.send(error)
+        res.json(error)
     })
 }
 

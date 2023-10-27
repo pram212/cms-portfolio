@@ -8,6 +8,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser');
 const auth = require('./middleware/authMiddleware')
 const expressLayouts = require('express-ejs-layouts')
+const cors = require('cors');
 
 const app = express()
 
@@ -29,6 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // Enable Access Public Folder
 app.use(express.static('public'))
+
+// Mengizinkan permintaan dari semua domain (dalam pengaturan produksi, sesuaikan ini dengan bijak)
+app.use(cors());
 
 // Load Routes
 const authRoutes = require('./routes/auth')
