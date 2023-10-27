@@ -11,6 +11,7 @@ router.get('/kontak', apiKontakController.index)
 router.get('/skill', apiSkillController.index)
 router.get('/pengalaman', apiPengalamanController.index)
 router.get('/portfolio', apiPortfolioController.index)
+router.get('/portfolio/:id', apiPortfolioController.show)
 
 router.use( (req, res) => res.json('URL tidak ditemukan', 404) )
 
