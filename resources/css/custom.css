@@ -1,0 +1,26 @@
+/* Contoh CSS untuk mengubah lebar dan warna scrollbar */
+.simplebar-scrollbar:before {
+    background-color: #3498db; /* Ganti dengan warna yang diinginkan */
+    width: 8px; /* Ganti dengan lebar yang diinginkan */
+}
+
+/* width */
+::-webkit-scrollbar {
+    width:5px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    @apply bg-neutral-100
+    /* background: #f1f1f1; */
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    @apply bg-neutral-400 rounded-sm
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-500 cursor-pointer
+}

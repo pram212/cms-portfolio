@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+.divider {
+  @apply flex-1 text-red-200 align-bottom bg-neutral-200 h-[2px] rounded-full
+}
+
+
+ 
