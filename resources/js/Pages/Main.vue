@@ -63,7 +63,7 @@ const openMobileMenu = ref(false)
             <ul class="space-y-6">
                 <li>
                     <div class="w-14 h-14 grayscale bg-cover rounded-sm shadow-md"
-                        style="background-image: url('img/foto.jpg');">
+                        :style="`background-image: url(${$page.props.photo_path})`">
                     </div>
                 </li>
                 <li class="uppercase font-poppins max-w-fit" :class="{ 'underline underline-offset-8': $page.url == '/home' }">
@@ -109,9 +109,9 @@ const openMobileMenu = ref(false)
         <!-- mobile sidebar end -->
 
 
-        <main class="relative top-[10%] h-full md:h-[80%] px-0 md:px-[70px]">
+        <main class="relative top-[10%] h-full md:h-[80%] px-0 md:px-[70px] bg-white">
             <div class="flex h-full">
-                <div id="foto" style="background-image: url('/img/foto.JPG');" class="w-[30%] bg-black bg-no-repeat bg-cover grayscale animated bounceInDown hidden md:inline-block">
+                <div id="foto" :style="`background-image: url(${$page.props.photo_path})`" class="w-[30%] bg-black bg-no-repeat bg-cover grayscale animated bounceInDown hidden md:inline-block">
                 </div>
                 <div class="flex-1 items-center animated jackInTheBox max-h-min py-10 px-10 overflow-y-auto simplebar bg-slate-100 " id="content">
                     <slot></slot>
@@ -119,7 +119,7 @@ const openMobileMenu = ref(false)
             </div>
         </main>
 
-        <footer class="absolute bottom-0 left-0 right-0 hidden md:flex items-center justify-between px-[80px] h-[10%]">
+        <footer class="absolute bottom-0 left-0 right-0 hidden md:flex items-center justify-between px-[80px] h-[10%] bg-white">
             <div>Copyright &copy; Pramono 2023</div>
             <div id="social" class="flex justify-end space-x-8">
                 <a href="https://www.linkedin.com/in/pramono-82a0721b9/" target="_blank">
@@ -147,8 +147,3 @@ const openMobileMenu = ref(false)
         </footer>
     </div>
 </template>
-
-<style>
-
-
-</style>
