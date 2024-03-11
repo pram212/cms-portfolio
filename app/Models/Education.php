@@ -9,6 +9,5 @@ class Education extends Model
 {
     use HasFactory;
 
-    protected $guarderd = ['id', 'created_at', 'updated_at'];
-    
+    protected $fillable = ['institution', 'start', 'end', 'title'];
 }

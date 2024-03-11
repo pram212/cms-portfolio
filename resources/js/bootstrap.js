@@ -7,6 +7,9 @@
 import axios from 'axios';
 window.axios = axios;
 
+import jQuery from 'jquery';
+window.$ = jQuery;
+
 import '@fortawesome/fontawesome-free/css/all.css';
 import lodash from 'lodash';
 window._ = lodash;

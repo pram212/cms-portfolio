@@ -10,6 +10,7 @@ use App\Models\About;
 use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Yajra\DataTables\Facades\DataTables;
 
 class AboutController extends Controller
 {
@@ -58,5 +59,17 @@ class AboutController extends Controller
             ]);
 
         }
+    }
+
+    public function datatableAbout()
+    {
+        $data = Education::query();
+
+        return DataTables::of($data)
+                ->addColumn('action', function($q) {
+                    return '<button class="btn" onclick="my_modal_1.showModal(); tes();">open modal</button>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
     }
 }

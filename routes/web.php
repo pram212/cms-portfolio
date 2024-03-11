@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\About;
@@ -68,10 +69,13 @@ Route::middleware('auth')->group(function () {
 
         Route::group(['prefix' => 'about', 'as' => 'about.'], function() {
             Route::resource('about-me', AboutController::class);
+            Route::resource('educations', EducationController::class);
         });
 
     });
 
 });
+
+Route::get("datatable-about", [AboutController::class, "datatableAbout" ]);
 
 require __DIR__ . '/auth.php';

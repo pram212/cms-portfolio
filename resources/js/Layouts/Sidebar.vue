@@ -29,7 +29,7 @@ const menus = [
             },
             {
                 name: "Education",
-                url: "/cms/about/education",
+                url: "/cms/about/educations",
             },
             {
                 name: "Skills",

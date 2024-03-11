@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     about: Object,
@@ -14,12 +13,14 @@ const form = useForm({
 const submit = () => {
     form.put(route("cms.about.about-me.update", 1), {
         onFinish: () => form.reset(),
-        preserveState: false
+        preserveState: false,
     });
 };
+
 </script>
 
 <template>
+
     <Head title="About Me" />
 
     <AuthenticatedLayout>
@@ -34,9 +35,8 @@ const submit = () => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
                     <form @submit.prevent="submit">
-
-                        <textarea placeholder="Bio" class="textarea textarea-bordered textarea-lg w-full" v-model="form.bio" ></textarea>
-
+                        <textarea placeholder="Bio" class="textarea textarea-bordered textarea-lg w-full"
+                            v-model="form.bio"></textarea>
                         <div class="mt-3">
                             <button class="btn btn-ptimary" type="submit">Update</button>
                         </div>
