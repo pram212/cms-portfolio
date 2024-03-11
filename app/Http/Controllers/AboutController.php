@@ -8,6 +8,7 @@ use App\Models\Skill;
 use App\Models\Service;
 use App\Models\About;
 use App\Models\Course;
+use App\Models\Experience;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Yajra\DataTables\Facades\DataTables;
@@ -21,8 +22,9 @@ class AboutController extends Controller
         $skills = Skill::all();
         $services = Service::all();
         $about = About::first();
+        $experiences = Experience::all();
 
-        return Inertia::render('About', compact('educations', 'courses', 'skills', 'services', 'about'));
+        return Inertia::render('About', compact('educations', 'courses', 'skills', 'services', 'about', 'experiences'));
     }
 
     public function index() 

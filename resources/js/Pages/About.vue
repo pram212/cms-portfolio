@@ -12,6 +12,7 @@ const props = defineProps({
     skills : Object,
     services : Object,
     about : Object,
+    experiences : Object,
 })
 
 const mappedEducations = props.educations.map(education => {
@@ -22,11 +23,13 @@ const mappedCourses = props.courses.map(course => {
     return { date:  moment(course.start).format("MMM YYYY") + " - " + moment(course.end).format("MMM YYYY"), institution: course.institution, description: course.description }
 })
 
-const experiences = ref([
-    { date: 'Jan 2020 - Oct 2021', institution : 'PT DesaTech Nusantara', description : 'Technical Writer' },
-    { date: 'Feb 2022 - Aug 2023', institution : 'PT Mandala Dwipantara', description : 'Software Engineer' },
-    { date: 'Sep 2022 - Present', institution : 'PT Melkhior Teknologi', description : 'Fullstack Developer' },
-])
+const mappedExperiences = props.experiences.map(experience => {
+    return { 
+        date:  moment(experience.start).format("MMM YYYY") + " - " + (experience.end ? moment(experience.end).format("MMM YYYY") : "Present"), 
+        institution: experience.company, 
+        description: experience.position 
+    }
+})
 
 </script>
 
@@ -54,7 +57,7 @@ const experiences = ref([
 
         <section class="mb-10">
             <header-content :title="'Experience'"></header-content>
-            <TimelineVue :list="experiences"></TimelineVue>
+            <TimelineVue :list="mappedExperiences"></TimelineVue>
         </section>
 
         <section class="mb-10">

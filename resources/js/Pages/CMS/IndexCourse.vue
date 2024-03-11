@@ -5,20 +5,20 @@ import PaginationLink from "@/Components/PaginationLink.vue";
 import { ref } from "vue";
 
 const props = defineProps({
-    educations: Object,
+    courses: Object,
 });
 
 const id = ref(null)
 
 function submitDelete() {
-    router.delete(route('cms.about.educations.destroy', id.value), { preserveState: false })
+    router.delete(route('cms.about.courses.destroy', id.value), { preserveState: false })
 }
 
 </script>
 
 <template>
 
-    <Head title="Education" />
+    <Head title="About - Education" />
 
     <AuthenticatedLayout>
         <template #breadcrumbs>
@@ -32,9 +32,9 @@ function submitDelete() {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
                     <div class="flex justify-between">
-                        <Link :href="route('cms.about.educations.create')" class="btn btn-sm btn-primary">Add</Link>
+                        <Link :href="route('cms.about.courses.create')" class="btn btn-sm btn-primary">Add</Link>
                         <!-- PAGINATION -->
-                        <PaginationLink :links="educations.links"></PaginationLink>
+                        <PaginationLink :links="courses.links"></PaginationLink>
                     </div>
                     <div class="divider"></div>
                     <div class="overflow-x-auto">
@@ -51,14 +51,14 @@ function submitDelete() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, i) in educations.data" :key="i">
+                                <tr v-for="(item, i) in courses.data" :key="i">
                                     <th>{{ i + 1 }}</th>
                                     <td>{{ item.institution }}</td>
                                     <td>{{ item.start }}</td>
                                     <td>{{ item.end }}</td>
-                                    <td>{{ item.title }}</td>
+                                    <td>{{ item.description }}</td>
                                     <td class="capitalize">
-                                        <Link :href="route('cms.about.educations.edit', item.id)"
+                                        <Link :href="route('cms.about.courses.edit', item.id)"
                                             class="btn btn-success btn-sm text-xs">edit</Link>
                                         <label for="delete_confirm_modal" @click="id = item.id;" class="btn btn-error btn-sm text-xs">delete</label>
                                     </td>
@@ -69,10 +69,10 @@ function submitDelete() {
                     <div class="flex justify-between pt-5">
                         <!-- TOTAL DATA SHOW -->
                         <div class="btn-secondary btn btn-sm">
-                            Total Data : {{ educations.total }}
+                            Total Data : {{ courses.total }}
                         </div>
                         <!-- PAGINATION -->
-                        <PaginationLink :links="educations.links"></PaginationLink>
+                        <PaginationLink :links="courses.links"></PaginationLink>
                     </div>
                 </div>
             </div>

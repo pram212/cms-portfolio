@@ -2,41 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skill;
+use App\Models\Experience;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-class SkillController extends Controller
+class ExperienceController extends Controller
 {
     public function index()
     {
-        $skills = Skill::paginate(7)->withQueryString();
-        return Inertia::render('CMS/IndexSkill', compact('skills'));
+        $experiences = Experience::paginate(10)->withQueryString();
+        return Inertia::render('CMS/IndexExperience', compact('experiences'));
     }
 
     public function create()
     {
-        return Inertia::render('CMS/FormSkill');
+        return Inertia::render('CMS/FormExperience');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', Rule::unique('skills')],
-            'presentage' => ['numeric'],
+            'company' => ['required'],
+            'start' => ['required', 'date'],
+            'end' => ['date', 'nullable'],
+            'position' => ['required'],
         ]);
 
         try {
             DB::beginTransaction();
 
-            Skill::create($request->all());
+            Experience::create($request->all());
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('cms.about.experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -52,28 +53,29 @@ class SkillController extends Controller
 
     public function edit($id)
     {
-        $skill = Skill::find($id);
-        return Inertia::render('CMS/FormSkill', compact('skill'));
+        $experience = Experience::find($id);
+        return Inertia::render('CMS/FormExperience', compact('experience'));
     }
 
     public function update(Request $request, $id)
     {
-        $skill = Skill::find($id);
         $request->validate([
-            'name' => ['required', Rule::unique('skills')->ignore($id)],
-            'presentage' => ['numeric'],
+            'company' => ['required'],
+            'start' => ['required', 'date'],
+            'end' => ['date', 'nullable'],
+            'position' => ['required'],
         ]);
 
         try {
             DB::beginTransaction();
             
-            $skill = Skill::find($id);
+            $experience = Experience::find($id);
 
-            $skill->update($request->all());
+            $experience->update($request->all());
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('cms.about.experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -93,11 +95,11 @@ class SkillController extends Controller
         try {
             DB::beginTransaction();
 
-            Skill::destroy($id);
+            Experience::destroy($id);
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('cms.about.experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

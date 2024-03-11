@@ -25,8 +25,8 @@ class EducationController extends Controller
     {
         $request->validate([
             'institution' => ['required'],
-            'start' => ['required'],
-            'end' => ['required'],
+            'start' => ['required', 'date'],
+            'end' => ['required', 'date'],
             'title' => ['required'],
         ]);
 

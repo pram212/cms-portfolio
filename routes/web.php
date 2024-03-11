@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SkillController;
 use App\Models\About;
 use App\Models\Contact;
 use App\Models\Course;
@@ -70,6 +73,9 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'about', 'as' => 'about.'], function() {
             Route::resource('about-me', AboutController::class);
             Route::resource('educations', EducationController::class);
+            Route::resource('skills', SkillController::class);
+            Route::resource('courses', CourseController::class);
+            Route::resource('experiences', ExperienceController::class);
         });
 
     });
