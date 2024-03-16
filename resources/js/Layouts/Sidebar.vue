@@ -52,7 +52,7 @@ const menus = [
     },
     {
         name: "Manage Portfolio",
-        url: "/cms/portfolio",
+        url: "/cms/portfolios",
         icon: '<i class="fas fa-tasks w-5"></i>',
     }
 ];

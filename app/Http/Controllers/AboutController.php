@@ -11,7 +11,6 @@ use App\Models\Course;
 use App\Models\Experience;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use Yajra\DataTables\Facades\DataTables;
 
 class AboutController extends Controller
 {
@@ -30,7 +29,7 @@ class AboutController extends Controller
     public function index() 
     {
         $about = About::find(1);
-        return Inertia::render('CMS/About', compact('about'));
+        return Inertia::render('CMS/FormAbout', compact('about'));
 
     }
 
@@ -61,17 +60,5 @@ class AboutController extends Controller
             ]);
 
         }
-    }
-
-    public function datatableAbout()
-    {
-        $data = Education::query();
-
-        return DataTables::of($data)
-                ->addColumn('action', function($q) {
-                    return '<button class="btn" onclick="my_modal_1.showModal(); tes();">open modal</button>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
     }
 }

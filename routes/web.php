@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
 use App\Models\About;
@@ -44,21 +46,10 @@ Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->middleware(['au
 Route::get('/', [HomeController::class, 'page'] );
 Route::get('/home', [HomeController::class, 'page'] );
 Route::get('/about', [AboutController::class, 'page']);
+Route::get('/contact', [ContactController::class, 'page']);
+Route::get('/portfolio', [PortfolioController::class, 'page']);
 
-Route::get('/contact', function () {
-    $contact = Contact::first();
-    return Inertia::render('Contact', compact('contact'));
-});
-
-Route::get('/portfolio', function () {
-    $portfolios = Portfolio::select('id', 'project_title', 'images')->get();
-    return Inertia::render('Portfolio', compact('portfolios'));
-});
-
-Route::get('/portfolio-detail/{id}', function ($id) {
-    $portfolio = Portfolio::find($id);
-    return Inertia::render('PortfolioDetail', compact('portfolio'));
-});
+Route::get('/portfolio-detail/{id}', [PortfolioController::class, 'pageDetail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,6 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', fn() => redirect('dashboard'));
         Route::get('home', [HomeController::class, 'index'])->name('home.index');
         Route::post('home', [HomeController::class, 'update'])->name('home.update');
+        Route::resource('contact', ContactController::class);
+        Route::resource('portfolios', PortfolioController::class);
 
         Route::group(['prefix' => 'about', 'as' => 'about.'], function() {
             Route::resource('about-me', AboutController::class);
