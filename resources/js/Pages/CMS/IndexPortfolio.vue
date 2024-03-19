@@ -18,13 +18,13 @@ function submitDelete() {
 
 <template>
 
-    <Head title="Experience" />
+    <Head title="Portfolio" />
 
     <AuthenticatedLayout>
         <template #breadcrumbs>
             <ul>
                 <li>Manage About</li>
-                <li>Experience</li>
+                <li>Portfolio</li>
             </ul>
         </template>
 

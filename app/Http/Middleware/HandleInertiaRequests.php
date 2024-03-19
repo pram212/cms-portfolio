@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
                 'type' => fn () => $request->session()->get('type'),
                 'message' => fn () => $request->session()->get('message'),
             ],
-            'photo_path' => Biodata::first()->photo
+            'photo_path' => app()->runningInConsole() ? Biodata::first()->photo : ''
         ];
     }
 }

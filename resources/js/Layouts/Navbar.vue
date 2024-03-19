@@ -21,6 +21,9 @@ import { Link } from "@inertiajs/vue3";
                 </label>
                 <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                     <li>
+                        <Link :href="'/home'" target="_blank">Launch</Link>
+                    </li>
+                    <li>
                         <Link :href="route('logout')" method="post" as="button">Logout</Link>
                     </li>
                 </ul>

@@ -14,7 +14,7 @@ const props = defineProps({
         <HeaderContentVue :title="'contact'" />
 
         <section class="mb-10">
-            <div class="md:grid md:grid-cols-3 gap-9 text-neutral-500">
+            <div class="md:grid md:grid-cols-3 gap-2 text-neutral-500">
                 <div class="w-full border py-10 border-1 border-neutral-300 flex flex-col items-center mb-8">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
