@@ -30,6 +30,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $biodata = Biodata::first();
+
         return [
             ...parent::share($request),
             'auth' => [
@@ -39,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'type' => fn () => $request->session()->get('type'),
                 'message' => fn () => $request->session()->get('message'),
             ],
-            'photo_path' => app()->runningInConsole() ? Biodata::first()->photo : ''
+            'photo_path' => $biodata ? $biodata->photo : "/img/foto.jpg"
         ];
     }
 }
