@@ -46,12 +46,12 @@ function submit()
                     <div class="divider"></div>
                     <form @submit.prevent="submit">
                         <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.company}">
-                            istitution :
+                            Company :
                             <input type="text" class="grow" v-model="form.company" />
                             <small class="text-xs text-error" v-if="form.errors.company">{{ form.errors.company }}</small>
                         </label>
                         <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.position}">
-                            Title :
+                            Position :
                             <input type="text" class="grow" v-model="form.position" />
                             <small v-if="form.errors.position">{{ form.errors.position }}</small>
                         </label>
