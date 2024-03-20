@@ -11,6 +11,7 @@ import { Link } from "@inertiajs/vue3";
             <label for="my-drawer" class="btn btn-ghost drawer-button">
                 <HamburgerVue />
             </label>
+            <h4 class="font-semibold">Content Management Sistem</h4>
         </div>
         <div class="flex-none gap-2">
             <ThemeControlVue></ThemeControlVue>
