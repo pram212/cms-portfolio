@@ -40,13 +40,15 @@ const submit = () => {
 
 // technologies handle
 const techVal = ref(null)
-const addTech = () => { form.technologies.push(techVal.value); techVal.value = ""; }
-const removeTech = (index) => form.technologies.splice(index, 1)
+const techInput = ref(null)
+const addTech = () => { form.technologies.push(techVal.value); techVal.value = ""; techInput.value.focus(); }
+const removeTech = (index) => { form.technologies.splice(index, 1); techInput.value.focus() }
 
 // modules handle
 const modulVal = ref(null)
-const addModule = () => { form.modules.push(modulVal.value); modulVal.value = ""; }
-const removeModule = (index) => form.modules.splice(index, 1)
+const modulInput = ref(null)
+const addModule = () => { form.modules.push(modulVal.value); modulVal.value = ""; modulInput.value.focus() }
+const removeModule = (index) => { form.modules.splice(index, 1); modulInput.value.focus() }
 
 // remove images form
 const removeImage = (index) => form.images_file.splice(index, 1)
@@ -92,8 +94,7 @@ const previewNewImage = (event) => {
                             :class="{ 'input-error': $page.props.errors.project_title }">
                             Project title :
                             <input type="text" class="grow" v-model="form.project_title" />
-                            <small class="text-xs text-error" v-if="$page.props.errors.project_title">{{
-                    $page.props.errors.project_title }}</small>
+                            <small class="text-xs text-error" v-if="$page.props.errors.project_title">{{ $page.props.errors.project_title }}</small>
                         </label>
 
                         <div class="flex justify-between space-x-2">
@@ -127,7 +128,7 @@ const previewNewImage = (event) => {
                                         <tr>
                                             <th colspan="3">Technologies</th>
                                         </tr>
-                                        <tr>
+                                        <tr v-if="$page.props.errors.technologies">
                                             <td colspan="3" class="text-error">{{ $page.props.errors.technologies }}</td>
                                         </tr>
                                         <tr>
@@ -156,7 +157,7 @@ const previewNewImage = (event) => {
                                                 <div class="join w-full">
                                                     <input
                                                         class="input w-full input-bordered join-item input-sm uppercase"
-                                                        placeholder="" v-model="techVal" />
+                                                        placeholder="" ref="techInput" v-model="techVal" />
                                                     <button type="button" class="btn join-item btn-sm btn-success"
                                                         @click="addTech">Add</button>
                                                 </div>
@@ -174,7 +175,7 @@ const previewNewImage = (event) => {
                                         <tr>
                                             <th colspan="3">Modules</th>
                                         </tr>
-                                        <tr>
+                                        <tr v-if="$page.props.errors.modules">
                                             <td colspan="3" class="text-error">{{ $page.props.errors.modules }}</td>
                                         </tr>
                                         <tr>
@@ -203,7 +204,7 @@ const previewNewImage = (event) => {
                                                 <div class="join w-full">
                                                     <input type="text"
                                                         class="input w-full input-bordered join-item input-sm uppercase"
-                                                        placeholder="" v-model="modulVal" />
+                                                        placeholder="" ref="modulInput" v-model="modulVal" />
                                                     <button type="button" class="btn join-item btn-sm btn-success"
                                                         @click="addModule">Add</button>
                                                 </div>

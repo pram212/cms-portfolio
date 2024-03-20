@@ -2,8 +2,6 @@
 import MainLayout from './Main.vue'
 import { Head } from '@inertiajs/vue3'
 import HeaderContentVue from '@/Components/HeaderContent.vue'
-import TimelineVue from '@/Components/Timeline.vue'
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import moment from 'moment'
 
@@ -62,7 +60,10 @@ const props = defineProps({
         <!-- preview section -->
         <section class="mb-10">
             <HeaderContentVue :title="portfolio.project_title"/>
-            <span class="text-neutral-400 text-sm">{{ moment(portfolio.start).format('MMM YYYY') }} - {{ moment(portfolio.end).format('MMM YYYY') }}</span>
+            <span class="text-neutral-400 text-sm">
+                {{ moment(portfolio.start).format('MMM YYYY') }} - 
+                {{ moment(portfolio.end).format('MMM YYYY') }}
+            </span>
             <Carousel :autoplay="2500" :itemsToShow="1.5" :wrap-around="true" class="mt-10">
                 <Slide v-for="(item, index) in JSON.parse(portfolio.images)" :key="index">
                     <div class="flex justify-center items-center carousel__item h-60 w-full bg-cover bg-no-repeat grayscale" :style="{ 'background-image' : `url(${item})` }">
@@ -90,7 +91,7 @@ const props = defineProps({
         <section class="mb-10">
             <HeaderContentVue :title="'Technology'"/>
             <ul class="space-y-2">
-                <li v-for="(item, index) in JSON.parse(portfolio.technologies)" :key="index">
+                <li v-for="(item, index) in JSON.parse(portfolio.technologies)" :key="index" class="uppercase">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#94a3b8" viewBox="0 0 24 24" stroke-width="0"
                         stroke="currentColor" class="w-6 h-6 inline-block text-neutral-700 ">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -105,7 +106,7 @@ const props = defineProps({
         <section class="mb-10">
             <HeaderContentVue :title="'Modules / Features'"/>
             <ul>
-                <li v-for="(item, index) in JSON.parse(portfolio.modules)" :key="index">
+                <li v-for="(item, index) in JSON.parse(portfolio.modules)" :key="index" class="capitalize">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="#94a3b8" viewBox="0 0 24 24" stroke-width="0"
                         stroke="currentColor" class="w-6 h-6 inline-block text-neutral-700 ">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -122,11 +123,11 @@ const props = defineProps({
             <table class="text-left w-full">
                 <tr>
                     <th>URL</th>
-                    <td>: {{ JSON.parse(portfolio.demo).url }}</td>
+                    <td>: {{ JSON.parse(portfolio.demo).url ?? "Not Available" }}</td>
                 </tr>
                 <tr>
                     <th>Other Info</th>
-                    <td>: <span class="tracking-wider"> {{ JSON.parse(portfolio.demo).info }}</span>
+                    <td>: <span class="tracking-wider"> {{ JSON.parse(portfolio.demo).info ?? "Not Available" }}</span>
                     </td>
                 </tr>
             </table>
