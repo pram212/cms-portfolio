@@ -70,19 +70,7 @@ const mappedExperiences = props.experiences.map(experience => {
                 <progress :value="item.presentage" max="100" class="h-[2px] text-neutral-700 w-full"></progress>
             </div>
         </section>
-
-        <section class="mb-10">
-            <header-content :title="'services'"></header-content>
-            <ul class="space-y-2">
-                <li class="capitalize" v-for="(item, index) in services" :key="index">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="#94a3b8" viewBox="0 0 24 24" stroke-width="0"
-                        stroke="currentColor" class="w-6 h-6 inline-block text-neutral-700 ">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                    </svg> {{ item.name }}
-                </li>
-            </ul>
-        </section>
+        
     </MainLayout>
     
 </template>

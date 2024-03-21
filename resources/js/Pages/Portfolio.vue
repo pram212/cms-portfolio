@@ -23,7 +23,7 @@ const portfolioMapped = props.portfolios.map(item => {
             <HeaderContentVue :title="'portfolio'" />
             <div class="md:grid grid-cols-1 md:grid-cols-2 gap-5 max-h-fit">
                 <Link :href="'portfolio-detail/' + item.id" v-for="(item, index) in portfolioMapped" :key="index">
-                    <CardPortfolio :caption="item.caption" :bg_image="item.path[1]" />
+                    <CardPortfolio :caption="item.caption" :bg_image="item.path[0]" />
                 </Link>
             </div>
         </div>

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact as MailContact;
+use App\Mail\NotifMessage;
+use App\Mail\SendMessage;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class ContactController extends Controller
@@ -53,4 +57,22 @@ class ContactController extends Controller
 
         }
     }
+
+    public function sendMessage(Request $request) 
+    {
+        $request->validate([
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'message' => ['required', 'string']
+        ]);
+
+        Mail::to("pramono6236@gmail.com")->send(new SendMessage( $request->message, $request->email, $request->name ));
+        Mail::to($request->email)->send(new NotifMessage($request->name));
+
+        return back()->with([
+            'type' => 'success',
+            'message' => 'Pesan berhasil dikirim'
+        ]);
+    }
+
 }

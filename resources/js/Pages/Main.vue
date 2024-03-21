@@ -1,11 +1,9 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue'
 
 const openMobileMenu = ref(false)
-
 </script>
-
 
 <template>
     <div class="h-screen relative">

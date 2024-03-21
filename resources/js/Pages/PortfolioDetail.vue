@@ -3,6 +3,7 @@ import MainLayout from './Main.vue'
 import { Head } from '@inertiajs/vue3'
 import HeaderContentVue from '@/Components/HeaderContent.vue'
 import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import moment from 'moment'
 
 const props = defineProps({
@@ -66,7 +67,7 @@ const props = defineProps({
             </span>
             <Carousel :autoplay="2500" :itemsToShow="1.5" :wrap-around="true" class="mt-10">
                 <Slide v-for="(item, index) in JSON.parse(portfolio.images)" :key="index">
-                    <div class="flex justify-center items-center carousel__item h-60 w-full bg-cover bg-no-repeat grayscale" :style="{ 'background-image' : `url(${item})` }">
+                    <div class="flex justify-center items-center carousel__item h-60 w-full bg-cover bg-no-repeat" :style="{ 'background-image' : `url(${item})` }">
                     </div>
                 </Slide>
 

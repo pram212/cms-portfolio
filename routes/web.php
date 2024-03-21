@@ -48,6 +48,7 @@ Route::get('/home', [HomeController::class, 'page'] );
 Route::get('/about', [AboutController::class, 'page']);
 Route::get('/contact', [ContactController::class, 'page']);
 Route::get('/portfolio', [PortfolioController::class, 'page']);
+Route::post('/contact/send-message', [ContactController::class, 'sendMessage'])->name('send-message');
 
 Route::get('/portfolio-detail/{id}', [PortfolioController::class, 'pageDetail']);
 
