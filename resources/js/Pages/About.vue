@@ -40,9 +40,7 @@ const mappedExperiences = props.experiences.map(experience => {
 
         <section class="mb-10">
             <header-content :title="'about me'"></header-content>
-            <p class=" mb-2">
-                {{ about.bio }}
-            </p>
+            <p class="whitespace-pre-line text-justify mb-2">{{ about.bio }}</p>
         </section>
 
         <section class="mb-10">
