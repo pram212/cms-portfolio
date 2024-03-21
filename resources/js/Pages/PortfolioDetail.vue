@@ -84,7 +84,7 @@ const props = defineProps({
         <!-- summary section start -->
         <section class="mb-10">
             <HeaderContentVue :title="'summary'"/>
-            <p>{{ portfolio.description }}</p>
+            <p class="whitespace-pre-line text-justify">{{ portfolio.description }}</p>
         </section>
         <!-- summary section end -->
 
