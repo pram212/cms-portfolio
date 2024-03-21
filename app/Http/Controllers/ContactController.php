@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Contact as MailContact;
 use App\Mail\NotifMessage;
 use App\Mail\SendMessage;
 use App\Models\Contact;
