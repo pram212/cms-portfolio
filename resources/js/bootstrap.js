@@ -20,11 +20,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import { createToaster } from '@meforma/vue-toaster';
 window.toaster = createToaster({ position: 'top-right' });
 
-
-import 'sweetalert2/dist/sweetalert2.css';
-import swal from 'sweetalert2';
-window.swal = swal;
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
