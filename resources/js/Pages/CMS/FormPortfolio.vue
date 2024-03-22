@@ -2,6 +2,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm, Link, router } from "@inertiajs/vue3";
 import { reactive, ref } from "vue";
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const props = defineProps({ portfolio: Object });
 
@@ -77,16 +79,15 @@ const previewNewImage = (event) => {
             <ul>
                 <li>Manage About</li>
                 <li>Portfolio</li>
-                <li>{{ !props.portfolio ? "Create" : "Edit" }}</li>
+                <li>{{ !props.portfolio ? "Add" : "Edit" }}</li>
             </ul>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
-                    <div class="flex justify-start">
-                        <Link href="/cms/portfolios" class="btn btn-sm btn-secondary capitalize">back to list
-                        </Link>
+                    <div class="flex justify-between">
+                        <Link href="/cms/portfolios" class="btn btn-sm btn-secondary capitalize">back to list</Link>
                     </div>
                     <div class="divider"></div>
                     <form @submit.prevent="submit">
@@ -112,12 +113,13 @@ const previewNewImage = (event) => {
                             </label>
                         </div>
 
-                        <label class="form-control font-semibold">
-                            <div class="label">
+                        <label class="form-control">
+                            <div class="label font-semibold">
                                 <span class="label-text">Description :</span>
                                 <span class="label-text-alt text-error text-xs" v-if="$page.props.errors.description">{{ $page.props.errors.description }}</span>
                             </div>
-                            <textarea class="textarea textarea-bordered h-24 w-full" v-model="form.description"></textarea>
+                            <QuillEditor theme="snow" contentType="html" v-model:content="form.description"></QuillEditor>
+                            <!-- <textarea class="textarea textarea-bordered h-24 w-full" v-model="form.description"></textarea> -->
                         </label>
 
                         <div class="flex justify-between space-x-1">
@@ -140,9 +142,8 @@ const previewNewImage = (event) => {
                                     <tbody>
                                         <tr v-for="(item, i) in form.technologies" :key="i" class="uppercase">
                                             <th>{{ i + 1 }}</th>
-                                            <td><input type="text"
-                                                    class="input w-full input-sm input-borered input-secondary uppercase"
-                                                    v-model="form.technologies[i]"></td>
+                                            <td>
+                                                <input type="text" class="input w-full input-sm input-borered input-secondary uppercase" v-model="form.technologies[i]"></td>
                                             <td class="text-right">
                                                 <button type="button" @click="removeTech(i)"
                                                     class="btn btn-sm btn-error">

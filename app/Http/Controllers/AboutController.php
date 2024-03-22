@@ -35,6 +35,8 @@ class AboutController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
+
         $request->validate([
             'bio' => ['required'],
         ]);
