@@ -12,25 +12,25 @@ const openMobileMenu = ref(false)
             <div class="relative hidden md:flex">
                 <ul class="flex items-center">
                     <li>
-                        <Link href="/home" :class="{ 'bg-neutral-800 text-white': $page.url == '/home' }"
+                        <Link href="/home" :class="{ 'bg-neutral-800 text-white': $page.url.includes('home') }"
                             class="font-[500] max-h-fit py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 ease-in-out uppercase">
                         home
                         </Link>
                     </li>
                     <li class="">
-                        <Link href="/about" :class="{ 'bg-neutral-800 text-white': $page.url == '/about' }"
+                        <Link href="/about" :class="{ 'bg-neutral-800 text-white': $page.url.includes('about') }"
                             class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
                         about
                         </Link>
                     </li>
                     <li class="">
-                        <Link href="/portfolio" :class="{ 'bg-neutral-800 text-white': $page.url == '/portfolio' }"
+                        <Link href="/portfolio" :class="{ 'bg-neutral-800 text-white': $page.url.includes('portfolio') }"
                             class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
                         portfolio
                         </Link>
                     </li>
                     <li class="">
-                        <Link href="/contact" :class="{ 'bg-neutral-800 text-white': $page.url == '/contact' }"
+                        <Link href="/contact" :class="{ 'bg-neutral-800 text-white': $page.url.includes('contact') }"
                             class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
                         contact
                         </Link>
@@ -64,18 +64,18 @@ const openMobileMenu = ref(false)
                         :style="`background-image: url(${$page.props.photo_path})`">
                     </div>
                 </li>
-                <li class="uppercase font-poppins max-w-fit" :class="{ 'underline underline-offset-8': $page.url == '/home' }">
+                <li class="uppercase font-poppins max-w-fit" :class="{ 'underline underline-offset-8': $page.url.includes('home') }">
                     <a href="/home">Home</a>
                 </li>
-                <li class="uppercase font-poppins max-w-fit" :class="{ 'underline underline-offset-8': $page.url == '/about' }">
+                <li class="uppercase font-poppins max-w-fit" :class="{ 'underline underline-offset-8': $page.url.includes('about') }">
                     <a href="/about">about</a>
                 </li>
                 <li class="uppercase font-poppins max-w-fit"
-                    :class="{ 'underline underline-offset-8': $page.url == '/portfolio' }">
+                    :class="{ 'underline underline-offset-8': $page.url.includes('portfolio') }">
                     <a href="/portfolio">portfolio</a>
                 </li>
                 <li class="uppercase font-poppins max-w-fit"
-                    :class="{ 'underline underline-offset-8': $page.url == '/contact' }">
+                    :class="{ 'underline underline-offset-8': $page.url.includes('contact') }">
                     <a href="/contact">contact</a>
                 </li>
                 <li class="flex justify-start space-x-3">
