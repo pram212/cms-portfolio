@@ -84,7 +84,7 @@ const props = defineProps({
         <!-- summary section start -->
         <section class="mb-10">
             <HeaderContentVue :title="'summary'"/>
-            <p class="whitespace-pre-line text-justify">{{ portfolio.description }}</p>
+            <div v-html="portfolio.description" class="whitespace-pre-line text-justify tracking-wide indent-5"></div>
         </section>
         <!-- summary section end -->
 
