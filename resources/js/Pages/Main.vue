@@ -11,27 +11,27 @@ const openMobileMenu = ref(false)
             <div class="text-3xl font-semibold tracking-[10px] uppercase">pramono</div>
             <div class="relative hidden md:flex">
                 <ul class="flex items-center">
-                    <li class="">
+                    <li>
                         <Link href="/home" :class="{ 'bg-neutral-800 text-white': $page.url == '/home' }"
-                            class="font-[600] max-h-fit py-2 px-[30px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 ease-in-out capitalize">
+                            class="font-[500] max-h-fit py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 ease-in-out uppercase">
                         home
                         </Link>
                     </li>
                     <li class="">
                         <Link href="/about" :class="{ 'bg-neutral-800 text-white': $page.url == '/about' }"
-                            class="font-[600] py-2 px-[30px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 capitalize">
+                            class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
                         about
                         </Link>
                     </li>
                     <li class="">
                         <Link href="/portfolio" :class="{ 'bg-neutral-800 text-white': $page.url == '/portfolio' }"
-                            class="font-[600] py-2 px-[30px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 capitalize">
-                        portfolios
+                            class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
+                        portfolio
                         </Link>
                     </li>
                     <li class="">
                         <Link href="/contact" :class="{ 'bg-neutral-800 text-white': $page.url == '/contact' }"
-                            class="font-[600] py-2 px-[30px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 capitalize">
+                            class="font-[500] py-2 px-[20px] inline-block hover:bg-neutral-800 hover:text-white transition-all duration-300 uppercase">
                         contact
                         </Link>
                     </li>
@@ -72,7 +72,7 @@ const openMobileMenu = ref(false)
                 </li>
                 <li class="uppercase font-poppins max-w-fit"
                     :class="{ 'underline underline-offset-8': $page.url == '/portfolio' }">
-                    <a href="/portfolio">portfolios</a>
+                    <a href="/portfolio">portfolio</a>
                 </li>
                 <li class="uppercase font-poppins max-w-fit"
                     :class="{ 'underline underline-offset-8': $page.url == '/contact' }">

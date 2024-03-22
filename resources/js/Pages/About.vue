@@ -2,7 +2,6 @@
 import { Head } from '@inertiajs/vue3';
 import HeaderContent from '@/Components/HeaderContent.vue'
 import MainLayout from './Main.vue';
-import { onMounted, ref } from 'vue';
 import TimelineVue from '@/Components/Timeline.vue';
 import moment from 'moment';
 
@@ -40,8 +39,7 @@ const mappedExperiences = props.experiences.map(experience => {
 
         <section class="mb-10">
             <header-content :title="'about me'"></header-content>
-            <div v-html="about.bio"></div>
-            <!-- <p v-html="about.bio" class="whitespace-pre-line text-justify mb-2">{{ about.bio }}</p> -->
+            <div v-html="about.bio" class="whitespace-pre-line text-justify tracking-wide indent-5"></div>
         </section>
 
         <section class="mb-10">
