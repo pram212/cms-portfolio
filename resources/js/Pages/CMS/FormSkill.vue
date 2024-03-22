@@ -35,31 +35,25 @@ function submit()
             </ul>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
-                    <div class="flex justify-start">
-                        <Link href="/cms/about/skills" class="btn btn-sm btn-secondary capitalize">back to list</Link>
-                    </div>
-                    <div class="divider"></div>
-                    <form @submit.prevent="submit">
-                        <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.name}">
-                            Name :
-                            <input type="text" class="grow" v-model="form.name" />
-                            <small class="text-xs text-error" v-if="form.errors.name">{{ form.errors.name }}</small>
-                        </label>
-                        <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.presentage}">
-                            Presentage :
-                            <input type="number" class="grow" v-model="form.presentage" />
-                            <small v-if="form.errors.presentage">{{ form.errors.presentage }}</small>
-                        </label>
-                      
-                        <div class="divider"></div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                    </form>
-                </div>
-            </div>
+        <div class="flex justify-start">
+            <Link href="/cms/about/skills" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
+        <div class="divider"></div>
+        <form @submit.prevent="submit">
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.name}">
+                Name :
+                <input type="text" class="grow" v-model="form.name" />
+                <small class="text-xs text-error" v-if="form.errors.name">{{ form.errors.name }}</small>
+            </label>
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.presentage}">
+                Presentage :
+                <input type="number" class="grow" v-model="form.presentage" />
+                <small v-if="form.errors.presentage">{{ form.errors.presentage }}</small>
+            </label>
+          
+            <div class="divider"></div>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </form>
     </AuthenticatedLayout>
 
 </template>

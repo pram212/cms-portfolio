@@ -37,26 +37,29 @@ onMounted(() => {
             <!-- PAGE CONTENT -->
             <div class="min-h-screen bg-base-300 ">
                 <!-- Page Heading -->
-                <header class="bg-base-200 shadow-lg">
+                <header class="bg-base-200 shadow-lg" v-if="$slots.breadcrumbs">
                     <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-                        <div class="text-sm font-semibold breadcrumbs" v-if="$slots.breadcrumbs">
+                        <div class="text-sm font-semibold breadcrumbs text-secondary">
                             <slot name="breadcrumbs"></slot>
                         </div>
                     </div>
                 </header>
                 <!-- Page content here -->
                 <main>
-                    <slot />
+                    <div class="py-12">
+                        <div class="max-w-7xl sm:px-6 lg:px-8">
+                            <div class="bg-gradient-to-b from-base-100 overflow-hidden shadow-sm sm:rounded-lg p-8">
+                                <slot />
+                            </div>
+                        </div>
+                    </div>
                 </main>
             </div>
             <!-- PAGE CONTENT END -->
         </div>
 
         <!-- Sidebar -->
-        <div
-            class="drawer-side h-full"
-            style="scroll-behavior: smooth; scroll-padding-top: 5rem"
-        >
+        <div class="drawer-side h-full" style="scroll-behavior: smooth; scroll-padding-top: 5rem">
             <label for="my-drawer" class="drawer-overlay"></label>
 
             <Sidebar />

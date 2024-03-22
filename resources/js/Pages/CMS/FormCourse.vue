@@ -36,48 +36,43 @@ function submit() {
             </ul>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
-                    <div class="flex justify-start">
-                        <Link href="/cms/about/courses" class="btn btn-sm btn-secondary capitalize">back to list</Link>
-                    </div>
-                    <div class="divider"></div>
-                    <form @submit.prevent="submit">
-                        <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
-                            :class="{ 'input-error': form.errors.institution }">
-                            istitution :
-                            <input type="text" class="grow" v-model="form.institution" />
-                            <small class="text-xs text-error" v-if="form.errors.institution">{{ form.errors.institution
-                                }}</small>
-                        </label>
-                        <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
-                            :class="{ 'input-error': form.errors.start }">
-                            Start :
-                            <input type="date" class="grow" v-model="form.start" />
-                            <small class="text-xs text-error" v-if="form.errors.start">{{ form.errors.start }}</small>
-                        </label>
-                        <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
-                            :class="{ 'input-error': form.errors.end }">
-                            End :
-                            <input type="date" class="grow" v-model="form.end" />
-                            <small class="text-xs text-error" v-if="form.errors.end">{{ form.errors.end }}</small>
-                        </label>
-                        <label class="form-control font-semibold">
-                            <div class="label">
-                                <span class="label-text">Description :</span>
-                                <span class="label-text-alt text-error text-xs" v-if="form.errors.description">{{ form.errors.description }}</span>
-                            </div>
-                            <textarea class="textarea textarea-bordered h-24 w-full"
-                                v-model="form.description"></textarea>
-                        </label>
-
-                        <div class="divider"></div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                    </form>
-                </div>
-            </div>
+        <div class="flex justify-start">
+            <Link href="/cms/about/courses" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
+        <div class="divider"></div>
+        <form @submit.prevent="submit">
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
+                :class="{ 'input-error': form.errors.institution }">
+                istitution :
+                <input type="text" class="grow" v-model="form.institution" />
+                <small class="text-xs text-error" v-if="form.errors.institution">{{ form.errors.institution
+                    }}</small>
+            </label>
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
+                :class="{ 'input-error': form.errors.start }">
+                Start :
+                <input type="date" class="grow" v-model="form.start" />
+                <small class="text-xs text-error" v-if="form.errors.start">{{ form.errors.start }}</small>
+            </label>
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
+                :class="{ 'input-error': form.errors.end }">
+                End :
+                <input type="date" class="grow" v-model="form.end" />
+                <small class="text-xs text-error" v-if="form.errors.end">{{ form.errors.end }}</small>
+            </label>
+            <label class="form-control font-semibold">
+                <div class="label">
+                    <span class="label-text">Description :</span>
+                    <span class="label-text-alt text-error text-xs" v-if="form.errors.description">{{ form.errors.description }}</span>
+                </div>
+                <textarea class="textarea textarea-bordered h-24 w-full"
+                    v-model="form.description"></textarea>
+            </label>
+
+            <div class="divider"></div>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </form>
+        
     </AuthenticatedLayout>
 
 </template>

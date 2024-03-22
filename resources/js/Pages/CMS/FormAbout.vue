@@ -32,19 +32,13 @@ const submit = () => {
                 <li>About Me</li>
             </ul>
         </template>
+        
+        <form @submit.prevent="submit">
+            <QuillEditor theme="snow" contentType="html" v-model:content="form.bio"></QuillEditor>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
-                    <form @submit.prevent="submit">
-                        <QuillEditor theme="snow" contentType="html" v-model:content="form.bio"></QuillEditor>
-
-                        <div class="mt-3">
-                            <button class="btn btn-ptimary" type="submit">Update</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="mt-3">
+                <button class="btn btn-primary uppercase" type="submit">save</button>
             </div>
-        </div>
+        </form>
     </AuthenticatedLayout>
 </template>

@@ -27,53 +27,46 @@ function submitDelete() {
                 <li>Portfolio</li>
             </ul>
         </template>
-
-        <div class="py-5">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg p-10">
-                    <div class="flex justify-between">
-                        <Link :href="route('cms.portfolios.create')" class="btn btn-sm btn-primary">Add</Link>
-                        <!-- PAGINATION -->
-                        <PaginationLink :links="portfolios.links"></PaginationLink>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="overflow-x-auto">
-                        <table class="table">
-                            <!-- head -->
-                            <thead>
-                                <tr class="uppercase">
-                                    <th>No</th>
-                                    <th>title</th>
-                                    <th>Start</th>
-                                    <th>End</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item, i) in portfolios.data" :key="i">
-                                    <th>{{ i + 1 }}</th>
-                                    <td>{{ item.project_title }}</td>
-                                    <td>{{ item.start }}</td>
-                                    <td>{{ item.end ?? "Present" }}</td>
-                                    <td class="capitalize">
-                                        <Link :href="route('cms.portfolios.edit', item.id)"
-                                            class="btn btn-success btn-sm text-xs">edit</Link>
-                                        <label for="delete_confirm_modal" @click="id = item.id;" class="btn btn-error btn-sm text-xs">delete</label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="flex justify-between pt-5">
-                        <!-- TOTAL DATA SHOW -->
-                        <div class="btn-secondary btn btn-sm">
-                            Total Data : {{ portfolios.total }}
-                        </div>
-                        <!-- PAGINATION -->
-                        <PaginationLink :links="portfolios.links"></PaginationLink>
-                    </div>
-                </div>
+        <div class="flex justify-between">
+            <Link :href="route('cms.portfolios.create')" class="btn btn-sm btn-primary">Add</Link>
+            <!-- PAGINATION -->
+            <PaginationLink :links="portfolios.links"></PaginationLink>
+        </div>
+        <div class="divider"></div>
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="uppercase">
+                        <th>No</th>
+                        <th>title</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, i) in portfolios.data" :key="i">
+                        <th>{{ i + 1 }}</th>
+                        <td>{{ item.project_title }}</td>
+                        <td>{{ item.start }}</td>
+                        <td>{{ item.end ?? "Present" }}</td>
+                        <td class="capitalize">
+                            <Link :href="route('cms.portfolios.edit', item.id)"
+                                class="btn btn-success btn-sm text-xs">edit</Link>
+                            <label for="delete_confirm_modal" @click="id = item.id;" class="btn btn-error btn-sm text-xs">delete</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-between pt-5">
+            <!-- TOTAL DATA SHOW -->
+            <div class="btn-secondary btn btn-sm">
+                Total Data : {{ portfolios.total }}
             </div>
+            <!-- PAGINATION -->
+            <PaginationLink :links="portfolios.links"></PaginationLink>
         </div>
 
         <!-- confirm delete pop up -->
