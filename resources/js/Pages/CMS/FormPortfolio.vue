@@ -37,7 +37,7 @@ const submit = () => {
                 preserveState: false 
             })
     else 
-        router.post(route('cms.portfolios.store'), form, { preserveState: false })
+        router.post(route('cms.portfolios.store'), form, { preserveState: (page) => Object.keys(page.props.errors).length })
 }
 
 // technologies handle

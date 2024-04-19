@@ -63,7 +63,7 @@ const props = defineProps({
             <HeaderContentVue :title="portfolio.project_title"/>
             <span class="text-neutral-400 text-sm">
                 {{ moment(portfolio.start).format('MMM YYYY') }} - 
-                {{ moment(portfolio.end).format('MMM YYYY') }}
+                {{ portfolio.end ? moment(portfolio.end).format('MMM YYYY') : "Present" }}
             </span>
             <Carousel :autoplay="2500" :itemsToShow="1.5" :wrap-around="true" class="mt-10">
                 <Slide v-for="(item, index) in JSON.parse(portfolio.images)" :key="index">
