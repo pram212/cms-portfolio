@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm, Link, router } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import { reactive, ref } from "vue";
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -18,8 +18,11 @@ const form = reactive({
     demo: props.portfolio? JSON.parse(props.portfolio.demo) : { url: null, info: null },
 })
 
+const submiting = ref(false)
+
 // submit form handle
 const submit = () => {
+    submiting.value = true
     if (props.portfolio) 
         router.post(route('cms.portfolios.update', props.portfolio.id), 
             { 
@@ -34,10 +37,15 @@ const submit = () => {
                 modules: form.modules 
             }, 
             { 
-                preserveState: false 
+                preserveState: (page) => Object.keys(page.props.errors).length,
+                onFinish: visit => { submiting.value = false },
             })
     else 
-        router.post(route('cms.portfolios.store'), form, { preserveState: (page) => Object.keys(page.props.errors).length })
+        router.post(route('cms.portfolios.store'), form, 
+            { 
+                preserveState: (page) => Object.keys(page.props.errors).length,
+                onFinish: visit => { submiting.value = false },
+            })
 }
 
 // technologies handle
@@ -87,7 +95,7 @@ const previewNewImage = (event) => {
             <Link href="/cms/portfolios" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
         <div class="divider"></div>
-        <form @submit.prevent="submit">
+        <form>
             <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
                 :class="{ 'input-error': $page.props.errors.project_title }">
                 Project title :
@@ -215,6 +223,7 @@ const previewNewImage = (event) => {
 
             </div>
 
+            <!-- IMAGE FORM -->
             <div class="border shadow-md p-3" :class="{'border-error' : $page.props.errors.images_file}">
                 <div class="flex justify-between">
                     <h1 class="font-semibold">Images</h1>
@@ -235,7 +244,9 @@ const previewNewImage = (event) => {
                     </div>
                 </div>
             </div>
+            <!-- IMAGE FORM END -->
 
+            <!-- DEMO FORM -->
             <div class="border shadow-md p-3 mt-2">
                 <h3 class="font-semibold">Demo</h3>
                 <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold">
@@ -249,10 +260,11 @@ const previewNewImage = (event) => {
                     <small class="text-xs text-error" v-if="$page.props.errors.demo">{{ $page.props.errors.demo }}</small>
                 </label>
             </div>
+            <!-- DEMO FORM END -->
 
-            <div class="divider"></div>
-
-            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <button type="button" @click="submit" :disabled="submiting" class="btn btn-primary btn-sm fixed bottom-5 right-5 shadow-2xl w-36">
+               Save
+            </button>
         </form>
     </AuthenticatedLayout>
 
