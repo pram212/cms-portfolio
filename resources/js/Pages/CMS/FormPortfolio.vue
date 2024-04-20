@@ -124,7 +124,6 @@ const previewNewImage = (event) => {
                     <span class="label-text-alt text-error text-xs" v-if="$page.props.errors.description">{{ $page.props.errors.description }}</span>
                 </div>
                 <QuillEditor theme="snow" contentType="html" v-model:content="form.description"></QuillEditor>
-                <!-- <textarea class="textarea textarea-bordered h-24 w-full" v-model="form.description"></textarea> -->
             </label>
 
             <div class="flex justify-between space-x-1">
