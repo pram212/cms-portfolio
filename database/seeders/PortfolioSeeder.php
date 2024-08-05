@@ -15,7 +15,7 @@ class PortfolioSeeder extends Seeder
     {
         $portfolio = [
             [
-                'code' => '01',
+                // 'code' => '01',
                 'project_title' => 'Insurance Management System',
                 'start' => '2021-02-14',
                 'end' => '2022-06-15',

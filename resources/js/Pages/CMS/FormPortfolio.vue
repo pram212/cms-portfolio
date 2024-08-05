@@ -9,6 +9,8 @@ const props = defineProps({ portfolio: Object });
 
 const form = reactive({
     project_title: props.portfolio?.project_title,
+    type: props.portfolio?.type,
+    client: props.portfolio?.client,
     start: props.portfolio?.start,
     end: props.portfolio?.end,
     technologies: props.portfolio ? JSON.parse(props.portfolio.technologies)?.map((item) => item) : [],
@@ -28,6 +30,8 @@ const submit = () => {
             { 
                 _method: 'put', 
                 project_title: form.project_title, 
+                type: form.type, 
+                client: form.client, 
                 start: form.start, 
                 end: form.end, 
                 technologies: form.technologies, 
@@ -101,6 +105,20 @@ const previewNewImage = (event) => {
                 Project title :
                 <input type="text" class="grow" v-model="form.project_title" />
                 <small class="text-xs text-error" v-if="$page.props.errors.project_title">{{ $page.props.errors.project_title }}</small>
+            </label>
+
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
+                :class="{ 'input-error': $page.props.errors.type }">
+                Type :
+                <input type="text" class="grow" placeholder="Web Application" v-model="form.type" />
+                <small class="text-xs text-error" v-if="$page.props.errors.type">{{ $page.props.errors.type }}</small>
+            </label>
+
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold"
+                :class="{ 'input-error': $page.props.errors.client }">
+                client :
+                <input client="text" class="grow" v-model="form.client" />
+                <small class="text-xs text-error" v-if="$page.props.errors.client">{{ $page.props.errors.client }}</small>
             </label>
 
             <div class="flex justify-between space-x-2">

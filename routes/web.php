@@ -52,6 +52,10 @@ Route::post('/contact/send-message', [ContactController::class, 'sendMessage'])-
 
 Route::get('/portfolio-detail/{id}', [PortfolioController::class, 'pageDetail']);
 
+Route::get('/new-layout', function() {
+    return Inertia::render('NewLayout');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
