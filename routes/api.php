@@ -1,17 +1,21 @@
 <?php
 
 use App\Http\Resources\BiodataResource;
+use App\Http\Resources\ClientResource;
 use App\Http\Resources\ContactResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\EducationResource;
 use App\Http\Resources\ExperienceResource;
+use App\Http\Resources\LinkResource;
 use App\Http\Resources\PortfolioResource;
 use App\Http\Resources\SkillResource;
 use App\Models\Biodata;
+use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Course;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Link;
 use App\Models\Portfolio;
 use App\Models\Skill;
 use Illuminate\Http\Request;
@@ -55,6 +59,16 @@ Route::get('skills', function() {
 Route::get('portfolios', function() {
     $data = Portfolio::all();
     return PortfolioResource::collection($data);
+});
+
+Route::get('links', function() {
+    $data = Link::all();
+    return LinkResource::collection($data);
+});
+
+Route::get('clients', function() {
+    $data = Client::all();
+    return ClientResource::collection($data);
 });
 
 Route::get('contacts', function() {
