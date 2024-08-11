@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ExperienceSeeder::class,
             SkillSeeder::class,
             ContactSeeder::class,
+            UserSeeder::class
         ]);
     }
 }
