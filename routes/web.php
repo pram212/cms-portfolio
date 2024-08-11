@@ -9,13 +9,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
-use App\Models\About;
-use App\Models\Contact;
-use App\Models\Course;
-use App\Models\Education;
-use App\Models\Portfolio;
-use App\Models\Service;
-use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,8 +31,41 @@ use Inertia\Inertia;
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+use Google\Service\Drive\DriveFile;
+use Google\Service\Drive;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
+Route::get('/show-gdrive', function() {
 
+});
+
+Route::get('/upload-gdrive', function(Request $request) {
+    try {
+        //code...
+        $driveService = app(Drive::class);
+    
+        $fileMetadata = new DriveFile([
+            'name' => 'Foto Aing',
+            'parents' => ['1SQUQ21NJe-8IcehtEiG_1es30wq8xMG1']
+            // 'mimeType' => 'application/vnd.google-apps.spreadsheet',
+        ]);
+    
+        $content = File::get(public_path('/img/foto2.jpg'));
+    
+        $file = $driveService->files->create($fileMetadata, [
+            'data' => $content,
+            'mimeType' => 'image/jpeg',
+            'uploadType' => 'multipart',
+            'fields' => 'id',
+        ]);
+    
+        return response()->json(['file_id' => $file->id]);
+    } catch (\Exception $th) {
+        throw $th;
+    }
+});
 
 Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
