@@ -37,7 +37,7 @@ class ExperienceController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.experiences.index')->with([
+            return Redirect::route('experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -75,7 +75,7 @@ class ExperienceController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.experiences.index')->with([
+            return Redirect::route('experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -99,7 +99,7 @@ class ExperienceController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.experiences.index')->with([
+            return Redirect::route('experiences.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

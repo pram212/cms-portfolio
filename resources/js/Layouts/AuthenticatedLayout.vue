@@ -28,7 +28,6 @@ onMounted(() => {
 
 <template>
     <div class="drawer">
-        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content max-h-full overflow-x-scroll">
             <!-- Navbar -->
             <Navbar></Navbar>
@@ -37,12 +36,11 @@ onMounted(() => {
             <!-- PAGE CONTENT -->
             <div class="min-h-screen bg-base-300 ">
                 <!-- Page Heading -->
-                <header class="bg-base-200 shadow-lg" v-if="$slots.breadcrumbs">
-                    <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-                        <div class="text-sm font-semibold breadcrumbs text-secondary">
-                            <slot name="breadcrumbs"></slot>
-                        </div>
+                <header class="bg-base-200 py-2 px-6 shadow-lg flex justify-between" v-if="$slots.breadcrumbs">
+                    <div class="text-sm font-semibold breadcrumbs text-secondary">
+                        <slot name="breadcrumbs"></slot>
                     </div>
+                    <Link :href="route('dashboard')" class="btn btn-secondary btn-ghost">Back to Home</Link>
                 </header>
                 <!-- Page content here -->
                 <main>
@@ -57,13 +55,5 @@ onMounted(() => {
             </div>
             <!-- PAGE CONTENT END -->
         </div>
-
-        <!-- Sidebar -->
-        <div class="drawer-side h-full" style="scroll-behavior: smooth; scroll-padding-top: 5rem">
-            <label for="my-drawer" class="drawer-overlay"></label>
-
-            <Sidebar />
-        </div>
-        <!-- Sidebar End -->
     </div>
 </template>

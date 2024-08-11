@@ -16,10 +16,10 @@ const form = useForm({
 function submit()
 {
     if (props.experience) {
-        form.put(route('cms.about.experiences.update', props.experience.id), { preserveState: true })
+        form.put(route('experiences.update', props.experience.id), { preserveState: true })
         return
     } 
-    form.post(route('cms.about.experiences.store'), { preserveState: true } )
+    form.post(route('experiences.store'), { preserveState: true } )
 }
 
 </script>
@@ -38,7 +38,7 @@ function submit()
         </template>
 
         <div class="flex justify-start">
-            <Link href="/cms/about/experiences" class="btn btn-sm btn-secondary capitalize">back to list</Link>
+            <Link href="/experiences" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
         <div class="divider"></div>
         <form @submit.prevent="submit">

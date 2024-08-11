@@ -26,7 +26,7 @@ const submiting = ref(false)
 const submit = () => {
     submiting.value = true
     if (props.portfolio) 
-        router.post(route('cms.portfolios.update', props.portfolio.id), 
+        router.post(route('portfolios.update', props.portfolio.id), 
             { 
                 _method: 'put', 
                 project_title: form.project_title, 
@@ -45,7 +45,7 @@ const submit = () => {
                 onFinish: visit => { submiting.value = false },
             })
     else 
-        router.post(route('cms.portfolios.store'), form, 
+        router.post(route('portfolios.store'), form, 
             { 
                 preserveState: (page) => Object.keys(page.props.errors).length,
                 onFinish: visit => { submiting.value = false },
@@ -96,7 +96,7 @@ const previewNewImage = (event) => {
         </template>
 
         <div class="flex justify-between">
-            <Link href="/cms/portfolios" class="btn btn-sm btn-secondary capitalize">back to list</Link>
+            <Link href="/portfolios" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
         <div class="divider"></div>
         <form>

@@ -13,9 +13,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route("cms.contact.update", 1), {
-        onFinish: () => form.reset(),
-        preserveState: false,
+    form.put(route("contact.update", 1), {
+        preserveState: 'errors',
     });
 };
 

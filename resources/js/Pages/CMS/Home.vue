@@ -14,7 +14,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("cms.home.update"), {
+    form.post(route("biodata.update"), {
         onFinish: () => form.reset(),
         preserveState: false
     });

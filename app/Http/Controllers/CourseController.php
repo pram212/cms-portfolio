@@ -37,7 +37,7 @@ class CourseController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.courses.index')->with([
+            return Redirect::route('courses.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -75,7 +75,7 @@ class CourseController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.courses.index')->with([
+            return Redirect::route('courses.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -99,7 +99,7 @@ class CourseController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.courses.index')->with([
+            return Redirect::route('courses.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

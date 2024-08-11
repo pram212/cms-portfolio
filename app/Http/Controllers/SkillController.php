@@ -36,7 +36,7 @@ class SkillController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('skills.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -73,7 +73,7 @@ class SkillController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('skills.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -97,7 +97,7 @@ class SkillController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.skills.index')->with([
+            return Redirect::route('skills.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

@@ -15,7 +15,7 @@ const menus = [
     },
     {
         name: "Manage Contact",
-        url: "/cms/contact",
+        url: "/contact",
         icon: '<i class="fas fa-phone w-5 w-5"></i>',
     },
     {
@@ -35,24 +35,24 @@ const menus = [
             },
             {
                 name: "Skills",
-                url: "/cms/about/skills",
+                url: "/skills",
                 icon: '<i class="fas fa-terminal w-5" aria-hidden="true"></i>',
             },
             {
                 name: "Courses",
-                url: "/cms/about/courses",
+                url: "/courses",
                 icon: '<i class="fas fa-bookmark w-5" aria-hidden="true"></i>',
             },
             {
                 name: "Experiences",
-                url: "/cms/about/experiences",
+                url: "/experiences",
                 icon: '<i class="fas fa-briefcase w-5"></i>',
             },
         ]
     },
     {
         name: "Manage Portfolio",
-        url: "/cms/portfolios",
+        url: "/portfolios",
         icon: '<i class="fas fa-tasks w-5"></i>',
     }
 ];

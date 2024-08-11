@@ -76,7 +76,7 @@ class PortfolioController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.portfolios.index')->with([
+            return Redirect::route('portfolios.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -132,7 +132,7 @@ class PortfolioController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.portfolios.index')->with([
+            return Redirect::route('portfolios.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -156,7 +156,7 @@ class PortfolioController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.portfolios.index')->with([
+            return Redirect::route('portfolios.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

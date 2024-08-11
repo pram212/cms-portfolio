@@ -11,7 +11,7 @@ const props = defineProps({
 const id = ref(null)
 
 function submitDelete() {
-    router.delete(route('cms.portfolios.destroy', id.value), { preserveState: false })
+    router.delete(route('portfolios.destroy', id.value), { preserveState: false })
 }
 
 </script>
@@ -28,7 +28,7 @@ function submitDelete() {
             </ul>
         </template>
         <div class="flex justify-between">
-            <Link :href="route('cms.portfolios.create')" class="btn btn-sm btn-primary">Add</Link>
+            <Link :href="route('portfolios.create')" class="btn btn-sm btn-primary">Add</Link>
             <!-- PAGINATION -->
             <PaginationLink :links="portfolios.links"></PaginationLink>
         </div>
@@ -52,7 +52,7 @@ function submitDelete() {
                         <td>{{ item.start }}</td>
                         <td>{{ item.end ?? "Present" }}</td>
                         <td class="capitalize">
-                            <Link :href="route('cms.portfolios.edit', item.id)"
+                            <Link :href="route('portfolios.edit', item.id)"
                                 class="btn btn-success btn-sm text-xs">edit</Link>
                             <label for="delete_confirm_modal" @click="id = item.id;" class="btn btn-error btn-sm text-xs">delete</label>
                         </td>

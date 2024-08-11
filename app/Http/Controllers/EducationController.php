@@ -25,8 +25,8 @@ class EducationController extends Controller
     {
         $request->validate([
             'institution' => ['required'],
-            'start' => ['required', 'date'],
-            'end' => ['required', 'date'],
+            'start' => ['required', 'numeric', 'min_digits:4'],
+            'end' => ['required', 'numeric', 'min_digits:4'],
             'title' => ['required'],
         ]);
 
@@ -37,7 +37,7 @@ class EducationController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.educations.index')->with([
+            return Redirect::route('educations.index')->with([
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
@@ -75,7 +75,7 @@ class EducationController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.educations.index')->with([
+            return Redirect::route('educations.index')->with([
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
@@ -99,7 +99,7 @@ class EducationController extends Controller
 
             DB::commit();
 
-            return Redirect::route('cms.about.educations.index')->with([
+            return Redirect::route('educations.index')->with([
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);

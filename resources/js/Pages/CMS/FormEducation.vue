@@ -16,10 +16,10 @@ const form = useForm({
 function submit()
 {
     if (props.education) {
-        form.put(route('cms.about.educations.update', props.education.id), { preserveState: true })
+        form.put(route('educations.update', props.education.id), { preserveState: 'errors' })
         return
     } 
-    form.post(route('cms.about.educations.store'), { preserveState: true } )
+    form.post(route('educations.store'), { preserveState: 'errors' } )
 }
 
 </script>
@@ -38,7 +38,7 @@ function submit()
         </template>
 
         <div class="flex justify-start">
-            <Link href="/cms/about/educations" class="btn btn-sm btn-secondary capitalize">back to list</Link>
+            <Link :href="route('educations.index')" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
         <div class="divider"></div>
         <form @submit.prevent="submit">

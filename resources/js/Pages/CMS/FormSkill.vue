@@ -14,10 +14,10 @@ const form = useForm({
 function submit()
 {
     if (props.skill) {
-        form.put(route('cms.about.skills.update', props.skill.id), { preserveState: true })
+        form.put(route('skills.update', props.skill.id), { preserveState: true })
         return
     } 
-    form.post(route('cms.about.skills.store'), { preserveState: true } )
+    form.post(route('skills.store'), { preserveState: true } )
 }
 
 </script>
@@ -36,7 +36,7 @@ function submit()
         </template>
 
         <div class="flex justify-start">
-            <Link href="/cms/about/skills" class="btn btn-sm btn-secondary capitalize">back to list</Link>
+            <Link href="/skills" class="btn btn-sm btn-secondary capitalize">back to list</Link>
         </div>
         <div class="divider"></div>
         <form @submit.prevent="submit">

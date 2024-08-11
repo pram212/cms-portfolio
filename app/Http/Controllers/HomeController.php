@@ -43,7 +43,7 @@ class HomeController extends Controller
             
             DB::commit();
 
-            return redirect()->route('cms.home.index')->with([
+            return redirect()->route('biodata.index')->with([
                 'type' => 'success',
                 'message' => 'Data berhasil diubah'
             ]);

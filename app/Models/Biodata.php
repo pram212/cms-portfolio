@@ -9,5 +9,5 @@ class Biodata extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['passion', 'name', 'photo', 'birth' ];
+    protected $fillable = ['name', 'title', 'photo', 'photo2', 'birthday', 'summary', 'degree'];
 }
