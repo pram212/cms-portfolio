@@ -5,6 +5,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SkillController;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('experiences', ExperienceController::class);
     Route::resource('skills', SkillController::class);
     Route::resource('courses', CourseController::class);
+    Route::resource('clients', ClientController::class);
 
     Route::group(['prefix' => 'cms', 'as' => 'cms.' ],function() {
     });

@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <div class="navbar py-0 shadow-md bg-base-100">
+    <div class="navbar py-5 shadow-md bg-base-100">
         <div class="flex-1">
             <h4 class="font-semibold ml-8 capitalize">
                 portfolio content management system

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
@@ -12,7 +16,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::paginate(10)->withQueryString();
+        return Inertia::render('CMS/IndexClient', compact('clients'));
     }
 
     /**
@@ -20,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CMS/FormClient');
     }
 
     /**
@@ -28,7 +33,37 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'company' => ['required'],
+            'logo_file' => ['required'],
+        ]);
+
+        try {
+
+            if ($request->file('logo_file')) {
+                $file = $request->file('logo_file');
+                $imagePath = "/storage/" . $file->storeAs('public/client', time() . $request->file('logo_file')->getClientOriginalName());
+                $request->merge(['logo' => Str::remove('public/', $imagePath)]);
+            }
+
+            DB::beginTransaction();
+
+            Client::create($request->except('logo_file'));
+
+            DB::commit();
+
+            return Redirect::route('clients.index')->with([
+                'type' => 'success',
+                'message' => 'Data Saved Succesfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 
     /**
@@ -44,7 +79,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return Inertia::render('CMS/FormClient', compact('client'));
     }
 
     /**
@@ -52,7 +87,37 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $request->validate([
+            'company' => ['required'],
+            'logo_file' => ['required'],
+        ]);
+
+        try {
+            
+            if ($request->file('logo_file')) {
+                $file = $request->file('logo_file');
+                $imagePath = "/storage/" . $file->storeAs('public/client', time() . $request->file('logo_file')->getClientOriginalName());
+                $request->merge(['logo' => Str::remove('public/', $imagePath)]);
+            }
+
+            DB::beginTransaction();
+
+            $client->update($request->except('logo_file'));
+
+            DB::commit();
+
+            return Redirect::route('clients.index')->with([
+                'type' => 'success',
+                'message' => 'Data Updated Successfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 
     /**
@@ -60,6 +125,24 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $client->delete();
+
+            DB::commit();
+
+            return Redirect::route('clients.index')->with([
+                'type' => 'success',
+                'message' => 'Data Deleted Successfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 }

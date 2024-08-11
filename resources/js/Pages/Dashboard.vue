@@ -69,6 +69,16 @@ import { Head, Link } from "@inertiajs/vue3";
           </div>
         </div>
 
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Client</h2>
+            <p>manage your client.</p>
+            <div class="card-actions justify-end">
+              <Link :href="route('clients.index')" class="btn btn-primary">Go</Link>
+            </div>
+          </div>
+        </div>
+
     </div>
   </AuthenticatedLayout>
 </template>
