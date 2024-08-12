@@ -48,10 +48,8 @@ function submitDelete() {
                     <tr v-for="(item, i) in clients.data" :key="i">
                         <th>{{ i + 1 }}</th>
                         <td>
-                            <div class="avatar">
-                                <div class="w-16 rounded">
-                                    <img :src="item.logo" :alt="`logo ${item.company}`" />
-                                </div>
+                            <div class="w-28 rounded">
+                                <img :src="item.logo" :alt="`logo ${item.company}`" />
                             </div>
                         </td>
                         <td>{{ item.company }}</td>

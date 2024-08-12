@@ -70,11 +70,11 @@ function submit()
                 </div>
 
                 <div class="flex justify-center">
-                    <div class="avatar my-2 cursor-pointer" @click="browseLogo">
-                        <div class="absolute left-0 right-0 text-secondary font-semibold text-center items-center">
+                    <div class="my-2 cursor-pointer" @click="browseLogo">
+                        <div class="mb-3 text-secondary font-semibold text-center items-center">
                             Logo Preview
                         </div>
-                        <div class="w-32 ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <div class="w-32 min-h-16 ring ring-primary ring-offset-base-100 ring-offset-2">
                             <img v-if="newLogo" :src="newLogo" />
                             <img v-else :src="client?.logo" />
                         </div>
