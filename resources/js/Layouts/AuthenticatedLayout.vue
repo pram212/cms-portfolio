@@ -3,7 +3,6 @@ import { onMounted } from "vue";
 import { themeChange } from "theme-change";
 import { Link, usePage } from "@inertiajs/vue3";
 import Navbar from "@/Layouts/Navbar.vue";
-import Sidebar from "@/Layouts/Sidebar.vue";
 
 const notificationType = usePage().props.flash.type;
 const notificationMessage = usePage().props.flash.message;
