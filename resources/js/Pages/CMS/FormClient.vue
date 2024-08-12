@@ -40,7 +40,7 @@ function submit()
 
 <template>
 
-    <Head title="client" />
+    <Head title="Client" />
 
     <AuthenticatedLayout>
         <template #breadcrumbs>

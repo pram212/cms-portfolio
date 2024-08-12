@@ -18,7 +18,7 @@ function submitDelete() {
 
 <template>
 
-    <Head title="Education" />
+    <Head title="Client" />
 
     <AuthenticatedLayout>
         <template #breadcrumbs>
