@@ -1,8 +1,13 @@
 <x-mail::message>
-# From {{ $name }}
-
+# dari {{ $name }} | {{ $email }}
+<br>
+Assalamu'alaikum,
+<br>
 {{ $message }}
 
-Thanks,<br>
-{{ config('app.name') }}
+<br>
+Thanks,
+<br>
+Best Regards, <br>
+{{ $name }}
 </x-mail::message>

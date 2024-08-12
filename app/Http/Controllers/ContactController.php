@@ -65,13 +65,21 @@ class ContactController extends Controller
             'message' => ['required', 'string']
         ]);
 
-        Mail::to("pramono6236@gmail.com")->send(new SendMessage( $request->message, $request->email, $request->name ));
-        Mail::to($request->email)->send(new NotifMessage($request->name));
+        try {
+            //code...
+            Mail::to("pramono6236@gmail.com")->send(new SendMessage( 
+                $request->message, $request->email, $request->name 
+            ));
+    
+            // Mail::to($request->email)->send(new NotifMessage($request->name));
+            
+            return response('email berhasil dikirim', 200);
 
-        return back()->with([
-            'type' => 'success',
-            'message' => 'Pesan berhasil dikirim'
-        ]);
+        } catch (\Exception $th) {
+            return response('gagal! ' . $th->getMessage(), 500 );
+
+        }
+
     }
 
 }

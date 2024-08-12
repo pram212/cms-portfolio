@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -19,7 +18,7 @@ class SendMessage extends Mailable
      */
     public function __construct(protected $message, protected $email, protected $name)
     {
-        //
+
     }
 
     /**
@@ -28,8 +27,8 @@ class SendMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->email),
-            subject: 'Message Web Portfolio',
+            from: new Address($this->email, $this->name),
+            subject: 'Discuss Project',
         );
     }
 
@@ -40,7 +39,7 @@ class SendMessage extends Mailable
     {
         return new Content(
             markdown: 'mail.send-message',
-            with: [ 'message' => $this->message, 'name' => $this->name ],
+            with: [ 'message' => $this->message, 'name' => $this->name, 'email' => $this->email ],
         );
     }
 

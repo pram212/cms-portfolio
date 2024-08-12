@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Resources\BiodataResource;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\ContactResource;
@@ -80,3 +81,5 @@ Route::get('biodata', function() {
     $data = Biodata::first();
     return new BiodataResource($data);
 });
+
+Route::post('send-message', [ContactController::class, 'sendMessage'])->name('api.send-message');
