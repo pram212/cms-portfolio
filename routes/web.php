@@ -8,6 +8,7 @@ use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,9 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('skills', SkillController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('clients', ClientController::class);
-
-    Route::group(['prefix' => 'cms', 'as' => 'cms.' ],function() {
-    });
+    Route::resource('links', LinkController::class);
 
 });
 

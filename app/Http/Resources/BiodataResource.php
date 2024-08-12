@@ -14,6 +14,14 @@ class BiodataResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'birthday' => $this->birthday,
+            'title' => $this->title,
+            'degree' => $this->degree,
+            'summary' => $this->summary,
+            'photo' => asset($this->photo),
+            'photo2' => asset($this->photo2),
+        ];
     }
 }

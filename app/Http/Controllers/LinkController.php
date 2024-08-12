@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class LinkController extends Controller
 {
@@ -12,7 +15,8 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //
+        $links = Link::paginate(10)->withQueryString();
+        return Inertia::render('CMS/IndexLink', compact('links'));
     }
 
     /**
@@ -20,7 +24,7 @@ class LinkController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CMS/FormLink');
     }
 
     /**
@@ -28,7 +32,33 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'url' => ['required', 'url:http,https'],
+            'svg' => ['required', 'string'],
+            'icon_font' => ['string', 'nullable'],
+            'color' => ['required', 'string'],
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            Link::create($request->all());
+
+            DB::commit();
+
+            return Redirect::route('links.index')->with([
+                'type' => 'success',
+                'message' => 'Data Saved Succesfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 
     /**
@@ -44,7 +74,7 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        //
+        return Inertia::render('CMS/FormLink', compact('link'));
     }
 
     /**
@@ -52,7 +82,33 @@ class LinkController extends Controller
      */
     public function update(Request $request, Link $link)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'url' => ['required', 'url:http,https'],
+            'svg' => ['required', 'string'],
+            'icon_font' => ['string', 'nullable'],
+            'color' => ['required', 'string'],
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $link->update($request->all());
+
+            DB::commit();
+
+            return Redirect::route('links.index')->with([
+                'type' => 'success',
+                'message' => 'Data Updated Successfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 
     /**
@@ -60,6 +116,24 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $link->delete();
+
+            DB::commit();
+
+            return Redirect::route('links.index')->with([
+                'type' => 'success',
+                'message' => 'Data Deleted Successfully'
+            ]);
+            
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return back()->with([
+                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+            ]);
+        }
     }
 }
