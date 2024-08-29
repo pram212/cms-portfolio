@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm, Link } from "@inertiajs/vue3";
+import { Head, useForm, Link, router } from "@inertiajs/vue3";
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -30,7 +30,15 @@ const previewLogo = (event) => {
 function submit()
 {
     if (props.client) {
-        form.put(route('clients.update', props.client.id), { preserveState: 'errors' })
+        router.post(route('clients.update', props.client.id),
+        {
+            _method: 'put',
+            company : form.company,
+            logo_file : form.logo_file,
+        },
+        { 
+            preserveState: 'errors' 
+        })
         return
     } 
     form.post(route('clients.store'), { preserveState: 'errors' } )

@@ -42,7 +42,7 @@ class ClientController extends Controller
 
             if ($request->file('logo_file')) {
                 $file = $request->file('logo_file');
-                $imagePath = "/storage/" . $file->storeAs('public/client', time() . $request->file('logo_file')->getClientOriginalName());
+                $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
                 $request->merge(['logo' => Str::remove('public/', $imagePath)]);
             }
 
@@ -87,6 +87,8 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        // dd($request->all());
+
         $request->validate([
             'company' => ['required'],
             'logo_file' => ['required'],
@@ -96,7 +98,7 @@ class ClientController extends Controller
             
             if ($request->file('logo_file')) {
                 $file = $request->file('logo_file');
-                $imagePath = "/storage/" . $file->storeAs('public/client', time() . $request->file('logo_file')->getClientOriginalName());
+                $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
                 $request->merge(['logo' => Str::remove('public/', $imagePath)]);
             }
 
