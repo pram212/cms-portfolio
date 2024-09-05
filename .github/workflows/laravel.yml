@@ -24,7 +24,7 @@ jobs:
           cd /var/www/html/cms.pram.web.id
           git pull
           composer update
-          php artisan migrate
+          php artisan migrate --force
           php artisan optimize:clear
           npm install
           npm run build
