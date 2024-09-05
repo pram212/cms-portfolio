@@ -23,4 +23,8 @@ jobs:
         script: |
           cd /var/www/html/cms.pram.web.id
           git pull
-          echo "hello pram"
+          composer update
+          php artisan migrate
+          php artisan optimize:clear
+          npm install
+          npm run build
