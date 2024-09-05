@@ -13,16 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Executing remote ssh commands using ssh key
+    
+    - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        key: ${{ secrets.DEPLOY_KEY }}  # Ganti dengan key baru
         script: |
           cd /var/www/html/cms.pram.web.id
           git pull
-          composer update
-          php artisan migrate
-          npm install
-          npm run build
