@@ -14,16 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Deploy to Server
+    - name: Deploy to my nevacloud server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.DEPLOY_KEY }}  # Ganti dengan key baru
+        password: ${{ secrets.SSH_PASSWORD }}  # Ganti dengan key baru
         script: |
           cd /var/www/html/cms.pram.web.id
           git pull
-          composer update
+          composer install --optimize-autoloader --no-dev
           php artisan migrate --force
           php artisan optimize:clear
           npm install
