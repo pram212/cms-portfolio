@@ -40,6 +40,7 @@ class PortfolioController extends Controller
     {
         $request->validate([
             'project_title' => ['required'],
+            'type' => ['required'],
             'start' => ['required', 'date'],
             'end' => ['date', 'nullable'],
             'technologies' => ['required', 'array'],
@@ -63,16 +64,7 @@ class PortfolioController extends Controller
                 $request->merge(['images' => $imagePaths ]);
             }
 
-            Portfolio::create([
-                'project_title' => $request->project_title,
-                'start' => $request->start,
-                'end' => $request->end,
-                'description' => $request->description,
-                'technologies' => json_encode($request->technologies),
-                'images' => json_encode($request->images),
-                'modules' => json_encode($request->modules),
-                'demo' => json_encode($request->demo),
-            ]);
+            Portfolio::create($request->all());
 
             DB::commit();
 
