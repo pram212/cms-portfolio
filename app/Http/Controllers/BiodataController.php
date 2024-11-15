@@ -63,15 +63,24 @@ class BiodataController extends Controller
         ]);
 
         if ($request->file('req_photo')) {
-            $file = $request->file('req_photo');
-            $imagePath = "/storage/" . $file->storeAs('public/photos', time() . $request->file('req_photo')->getClientOriginalName());
-            $request->merge(['photo' => Str::remove('public/', $imagePath)]);
+            $path = $request->file('req_photo')->storeAs(
+                'photos', // folder name
+                $request->file('req_photo')->hashName(), // file name with hash
+                'public' // disk
+            );
+
+            $request->merge(['photo' => "/storage/" . $path ]);
         }
 
         if ($request->file('req_photo2')) {
-            $file = $request->file('req_photo2');
-            $imagePath = "/storage/" . $file->storeAs('public/photos', time() . $request->file('req_photo2')->getClientOriginalName());
-            $request->merge(['photo2' => Str::remove('public/', $imagePath)]);
+
+            $path = $request->file('req_photo2')->storeAs(
+                'photos', // folder name
+                $request->file('req_photo2')->hashName(), // file name with hash
+                'public' // disk
+            );
+
+            $request->merge(['photo2' => "/storage/" . $path ]);
         }
 
         try {
