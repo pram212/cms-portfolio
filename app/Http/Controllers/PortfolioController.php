@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 
@@ -50,7 +48,6 @@ class PortfolioController extends Controller
             'demo' => ['required'],
         ]);
 
-        
         try {
             DB::beginTransaction();
 
@@ -58,11 +55,24 @@ class PortfolioController extends Controller
                 $imagePaths = [];
                 foreach ($request->file('images_file') as $key => $item) {
                     $file = $item['file'];
-                    $storagePath = "/storage/" . $file->storeAs('public/portfolio_images', time() . $file->getClientOriginalName());
-                    array_push($imagePaths, Str::remove('public/', $storagePath));
+
+                    $path = $file->storeAs(
+                        'photos', // folder name
+                        $file->hashName(), // file name with hash
+                        'public' // disk
+                    );
+                    array_push($imagePaths, '/storage/' . $path);
                 }
+
                 $request->merge(['images' => $imagePaths ]);
             }
+
+            $request->merge([
+                'technologies' => json_encode($request->technologies),
+                'images' => json_encode($request->images),
+                'modules' => json_encode($request->modules),
+                'demo' => json_encode($request->demo),
+            ]);
 
             Portfolio::create($request->all());
 
@@ -110,9 +120,15 @@ class PortfolioController extends Controller
                 foreach ($request->file('images_file') as $key => $item) {
                     // upload new file
                     $file = $item['file'];
-                    $storagePath = "/storage/" . $file->storeAs('public/portfolio_images', time() . $file->getClientOriginalName());
-                    // update image path existing with path of file uploaded
-                    $imageExisting->push(Str::remove('public/', $storagePath));
+
+                    $path = $file->storeAs(
+                        'photos', // folder name
+                        $file->hashName(), // file name with hash
+                        'public' // disk
+                    );
+
+                    $imageExisting->push('/storage/' . $path);
+
                 }
                 // add new key in the request for new image paths
                 $request->merge(['images' => $imageExisting ]);
