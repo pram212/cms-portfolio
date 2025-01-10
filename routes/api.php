@@ -62,6 +62,11 @@ Route::get('portfolios', function() {
     return PortfolioResource::collection($data);
 });
 
+Route::get('portfolios/{id}', function($id) {
+    $data = Portfolio::find($id);
+    return new PortfolioResource($data);
+});
+
 Route::get('links', function() {
     $data = Link::all();
     return LinkResource::collection($data);
