@@ -40,7 +40,8 @@ function submitDelete() {
                     <tr class="uppercase">
                         <th>No</th>
                         <th>Programming</th>
-                        <th>Presentage</th>
+                        <th>Level</th>
+                        <th>Category</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -48,12 +49,8 @@ function submitDelete() {
                     <tr v-for="(item, i) in skills.data" :key="i">
                         <th>{{ i + 1 }}</th>
                         <td>{{ item.name }}</td>
-                        <td>
-                            <div class="flex items-center">
-                                <span class="w-10">{{ item.presentage }} %</span>
-                                <progress :value="item.presentage" max="100" class="h-[6px] text-neutral-700 w-full progress-primary"></progress>
-                            </div>
-                        </td>
+                        <td>{{ item.level }}</td>
+                        <td>{{ item.category }}</td>
                         <td class="capitalize text-center">
                             <Link :href="route('skills.edit', item.id)"
                                 class="btn btn-success btn-sm text-xs">edit</Link>

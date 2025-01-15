@@ -53,8 +53,9 @@ Route::get('experiences', function() {
 });
 
 Route::get('skills', function() {
-    $data = Skill::all();
-    return SkillResource::collection($data);
+    $data = SkillResource::collection(Skill::all());
+    $grouped = $data->groupBy('category');
+    return $grouped;
 });
 
 Route::get('portfolios', function() {

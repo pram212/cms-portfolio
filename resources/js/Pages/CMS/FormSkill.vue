@@ -8,7 +8,8 @@ const props = defineProps({
 
 const form = useForm({
     name : props.skill?.name,
-    presentage : props.skill?.presentage,
+    level : props.skill?.level,
+    category : props.skill?.category,
 })
 
 function submit()
@@ -46,11 +47,19 @@ function submit()
                 <small class="text-xs text-error" v-if="form.errors.name">{{ form.errors.name }}</small>
             </label>
             <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.presentage}">
-                Presentage :
-                <input type="number" class="grow" v-model="form.presentage" />
-                <small v-if="form.errors.presentage">{{ form.errors.presentage }}</small>
+                Category :
+                <input type="text" class="grow" v-model="form.category" placeholder="huruf kecil"/>
+                <small v-if="form.errors.presentage">{{ form.errors.category }}</small>
             </label>
-          
+            <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold" :class="{'input-error' : form.errors.level}">
+                Level :
+                <select class="grow" v-model="form.level">
+                    <option value="basic">Basic</option>
+                    <option value="experience">Experience</option>
+                    <option value="advance">Advance</option>
+                </select>
+                <small v-if="form.errors.level">{{ form.errors.level }}</small>
+            </label>
             <div class="divider"></div>
             <button type="submit" class="btn btn-primary btn-sm">Save</button>
         </form>
