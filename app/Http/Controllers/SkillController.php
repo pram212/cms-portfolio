@@ -13,7 +13,7 @@ class SkillController extends Controller
 {
     public function index()
     {
-        $skills = Skill::paginate(7)->withQueryString();
+        $skills = Skill::paginate(20)->withQueryString();
         return Inertia::render('CMS/IndexSkill', compact('skills'));
     }
 
