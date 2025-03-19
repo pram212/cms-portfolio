@@ -13,11 +13,8 @@ const form = reactive({
     client: props.portfolio?.client,
     start: props.portfolio?.start,
     end: props.portfolio?.end,
-    technologies: props.portfolio ? JSON.parse(props.portfolio.technologies)?.map((item) => item) : [],
     images_file: props.portfolio ? JSON.parse(props.portfolio.images)?.map(item => ({ path: item, temp: null })) : [],
-    modules: props.portfolio ? JSON.parse(props.portfolio.modules)?.map((item) => item) : [],
     description: props.portfolio?.description,
-    demo: props.portfolio? JSON.parse(props.portfolio.demo) : { url: null, info: null },
 })
 
 const submiting = ref(false)
@@ -34,11 +31,8 @@ const submit = () => {
                 client: form.client, 
                 start: form.start, 
                 end: form.end, 
-                technologies: form.technologies, 
                 images_file: form.images_file, 
                 description: form.description,
-                demo: form.demo,
-                modules: form.modules 
             }, 
             { 
                 preserveState: (page) => Object.keys(page.props.errors).length,
@@ -51,18 +45,6 @@ const submit = () => {
                 onFinish: visit => { submiting.value = false },
             })
 }
-
-// technologies handle
-const techVal = ref(null)
-const techInput = ref(null)
-const addTech = () => { form.technologies.push(techVal.value); techVal.value = ""; techInput.value.focus(); }
-const removeTech = (index) => { form.technologies.splice(index, 1); techInput.value.focus() }
-
-// modules handle
-const modulVal = ref(null)
-const modulInput = ref(null)
-const addModule = () => { form.modules.push(modulVal.value); modulVal.value = ""; modulInput.value.focus() }
-const removeModule = (index) => { form.modules.splice(index, 1); modulInput.value.focus() }
 
 // remove images form
 const removeImage = (index) => form.images_file.splice(index, 1)
@@ -144,102 +126,6 @@ const previewNewImage = (event) => {
                 <QuillEditor theme="snow" contentType="html" v-model:content="form.description"></QuillEditor>
             </label>
 
-            <div class="flex justify-between space-x-1">
-                <!-- Technologies form -->
-                <div class="overflow-x-auto border my-2 shadow-md w-1/2 py-2" :class="{'border-error' : $page.props.errors.technologies}">
-                    <table class="table table-xs">
-                        <thead class="uppercase text-center font-semibold">
-                            <tr>
-                                <th colspan="3">Technologies</th>
-                            </tr>
-                            <tr v-if="$page.props.errors.technologies">
-                                <td colspan="3" class="text-error">{{ $page.props.errors.technologies }}</td>
-                            </tr>
-                            <tr>
-                                <th>No</th>
-                                <th>Item</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, i) in form.technologies" :key="i" class="uppercase">
-                                <th>{{ i + 1 }}</th>
-                                <td>
-                                    <input type="text" class="input w-full input-sm input-borered input-secondary uppercase" v-model="form.technologies[i]"></td>
-                                <td class="text-right">
-                                    <button type="button" @click="removeTech(i)"
-                                        class="btn btn-sm btn-error">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td class="text-center" colspan="3">
-                                    <div class="join w-full">
-                                        <input
-                                            class="input w-full input-bordered join-item input-sm uppercase"
-                                            placeholder="" ref="techInput" v-model="techVal" />
-                                        <button type="button" class="btn join-item btn-sm btn-success"
-                                            @click="addTech">Add</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- End Technologies form -->
-
-                <!-- Modules form -->
-                <div class="overflow-x-auto border my-2 shadow-md w-1/2 py-2" :class="{'border-error' : $page.props.errors.technologies}">
-                    <table class="table table-xs">
-                        <thead class="uppercase text-center font-semibold">
-                            <tr>
-                                <th colspan="3">Modules</th>
-                            </tr>
-                            <tr v-if="$page.props.errors.modules">
-                                <td colspan="3" class="text-error">{{ $page.props.errors.modules }}</td>
-                            </tr>
-                            <tr>
-                                <th>No</th>
-                                <th>Item</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, i) in form.modules" :key="i" class="uppercase">
-                                <th>{{ i + 1 }}</th>
-                                <td><input type="text"
-                                        class="input w-full input-sm input-borered input-secondary uppercase"
-                                        v-model="form.modules[i]"></td>
-                                <td class="text-right">
-                                    <button type="button" @click="removeModule(i)"
-                                        class="btn btn-sm btn-error">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td class="text-center" colspan="3">
-                                    <div class="join w-full">
-                                        <input type="text"
-                                            class="input w-full input-bordered join-item input-sm uppercase"
-                                            placeholder="" ref="modulInput" v-model="modulVal" />
-                                        <button type="button" class="btn join-item btn-sm btn-success"
-                                            @click="addModule">Add</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- End Modules form -->
-
-            </div>
-
             <!-- IMAGE FORM -->
             <div class="border shadow-md p-3" :class="{'border-error' : $page.props.errors.images_file}">
                 <div class="flex justify-between">
@@ -262,22 +148,6 @@ const previewNewImage = (event) => {
                 </div>
             </div>
             <!-- IMAGE FORM END -->
-
-            <!-- DEMO FORM -->
-            <div class="border shadow-md p-3 mt-2">
-                <h3 class="font-semibold">Demo</h3>
-                <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold">
-                    Url :
-                    <input type="text" class="grow" v-model="form.demo.url" />
-                    <small class="text-xs text-error" v-if="$page.props.errors.demo">{{ $page.props.errors.demo }}</small>
-                </label>
-                <label class="input input-bordered flex items-center gap-2 mb-3 capitalize font-semibold">
-                    Info :
-                    <input type="text" class="grow" v-model="form.demo.info" />
-                    <small class="text-xs text-error" v-if="$page.props.errors.demo">{{ $page.props.errors.demo }}</small>
-                </label>
-            </div>
-            <!-- DEMO FORM END -->
 
             <button type="button" @click="submit" :disabled="submiting" class="btn btn-primary btn-sm fixed bottom-5 right-5 shadow-2xl w-36">
                Save

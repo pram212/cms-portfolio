@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class PortfolioController extends Controller
 {
@@ -25,7 +24,7 @@ class PortfolioController extends Controller
 
     public function index()
     {
-        $portfolios = Portfolio::paginate(10)->withQueryString();
+        $portfolios = Portfolio::orderBy("start", "asc")->paginate(10)->withQueryString();
         return Inertia::render('CMS/IndexPortfolio', compact('portfolios'));
     }
 
@@ -41,11 +40,8 @@ class PortfolioController extends Controller
             'type' => ['required'],
             'start' => ['required', 'date'],
             'end' => ['date', 'nullable'],
-            'technologies' => ['required', 'array'],
             'images_file' => ['required', 'array'],
-            'modules' => ['required', 'array'],
             'description' => ['required', 'string'],
-            'demo' => ['required'],
         ]);
 
         try {
@@ -68,10 +64,7 @@ class PortfolioController extends Controller
             }
 
             $request->merge([
-                'technologies' => json_encode($request->technologies),
                 'images' => json_encode($request->images),
-                'modules' => json_encode($request->modules),
-                'demo' => json_encode($request->demo),
             ]);
 
             Portfolio::create($request->all());
@@ -85,7 +78,7 @@ class PortfolioController extends Controller
             
         } catch (\Exception $ex) {
             DB::rollBack();
-
+            throw $ex;
             return back()->with([
                 'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
@@ -104,11 +97,8 @@ class PortfolioController extends Controller
             'project_title' => ['required'],
             'start' => ['required', 'date'],
             'end' => ['date', 'nullable'],
-            'technologies' => ['required', 'array'],
             'images_file' => ['required', 'array'],
-            'modules' => ['required', 'array'],
             'description' => ['required', 'string'],
-            'demo' => ['required'],
         ]);
     
         try {
