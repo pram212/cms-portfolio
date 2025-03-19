@@ -59,7 +59,7 @@ Route::get('skills', function() {
 });
 
 Route::get('portfolios', function() {
-    $data = Portfolio::all();
+    $data = Portfolio::orderBy("start", "asc")->get();
     return PortfolioResource::collection($data);
 });
 
