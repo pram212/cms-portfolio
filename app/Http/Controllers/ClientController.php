@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use App\Services\SupabaseStorageService;
 
 class ClientController extends Controller
 {
+    protected $supabaseService;
+
+    public function __construct(SupabaseStorageService $supabaseService)
+    {
+        $this->supabaseService = $supabaseService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +49,8 @@ class ClientController extends Controller
 
             if ($request->file('logo_file')) {
                 $file = $request->file('logo_file');
-                $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
+                $imagePath = $this->supabaseService->upload(file: $file, prefix: "client/");
+                // $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
                 $request->merge(['logo' => Str::remove('public/', $imagePath)]);
             }
 
@@ -56,22 +64,14 @@ class ClientController extends Controller
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
 
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Client $client)
-    {
-        //
     }
 
     /**
@@ -95,10 +95,11 @@ class ClientController extends Controller
         ]);
 
         try {
-            
+
             if ($request->file('logo_file')) {
                 $file = $request->file('logo_file');
-                $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
+                $imagePath = $this->supabaseService->upload(file: $file, prefix: "client/");
+                // $imagePath = "/storage/" . $file->storeAs('public/client', $request->file('logo_file')->getClientOriginalName());
                 $request->merge(['logo' => Str::remove('public/', $imagePath)]);
             }
 
@@ -112,12 +113,12 @@ class ClientController extends Controller
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
 
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
     }
@@ -138,12 +139,12 @@ class ClientController extends Controller
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
 
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
     }

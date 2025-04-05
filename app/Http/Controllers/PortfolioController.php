@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use App\Services\SupabaseStorageService;
 
 class PortfolioController extends Controller
 {
+
+    protected $supabaseService;
+
+    public function __construct(SupabaseStorageService $supabaseService)
+    {
+        $this->supabaseService = $supabaseService;
+    }
+
     public function page()
     {
         $portfolios = Portfolio::select('id', 'project_title', 'images')->get();
@@ -51,16 +60,16 @@ class PortfolioController extends Controller
                 $imagePaths = [];
                 foreach ($request->file('images_file') as $key => $item) {
                     $file = $item['file'];
-
-                    $path = $file->storeAs(
-                        'photos', // folder name
-                        $file->hashName(), // file name with hash
-                        'public' // disk
-                    );
-                    array_push($imagePaths, '/storage/' . $path);
+                    $path = $this->supabaseService->upload($file);
+                    // $path = $file->storeAs(
+                    //     'photos', // folder name
+                    //     $file->hashName(), // file name with hash
+                    //     'public' // disk
+                    // );
+                    array_push($imagePaths, $path);
                 }
 
-                $request->merge(['images' => $imagePaths ]);
+                $request->merge(['images' => $imagePaths]);
             }
 
             $request->merge([
@@ -75,12 +84,12 @@ class PortfolioController extends Controller
                 'type' => 'success',
                 'message' => 'Data Saved Succesfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
             throw $ex;
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
     }
@@ -100,7 +109,7 @@ class PortfolioController extends Controller
             'images_file' => ['required', 'array'],
             'description' => ['required', 'string'],
         ]);
-    
+
         try {
             DB::beginTransaction();
             // get image paths existing from request with key "path"
@@ -110,18 +119,18 @@ class PortfolioController extends Controller
                 foreach ($request->file('images_file') as $key => $item) {
                     // upload new file
                     $file = $item['file'];
+                    $path = $this->supabaseService->upload($file);
 
-                    $path = $file->storeAs(
-                        'photos', // folder name
-                        $file->hashName(), // file name with hash
-                        'public' // disk
-                    );
+                    // $path = $file->storeAs(
+                    //     'photos', // folder name
+                    //     $file->hashName(), // file name with hash
+                    //     'public' // disk
+                    // );
 
-                    $imageExisting->push('/storage/' . $path);
-
+                    $imageExisting->push($path);
                 }
                 // add new key in the request for new image paths
-                $request->merge(['images' => $imageExisting ]);
+                $request->merge(['images' => $imageExisting]);
             }
 
             $portfolio = Portfolio::find($id);
@@ -134,15 +143,14 @@ class PortfolioController extends Controller
                 'type' => 'success',
                 'message' => 'Data Updated Successfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
-            
+
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
-
     }
 
     public function destroy($id)
@@ -158,12 +166,12 @@ class PortfolioController extends Controller
                 'type' => 'success',
                 'message' => 'Data Deleted Successfully'
             ]);
-            
         } catch (\Exception $ex) {
             DB::rollBack();
 
             return back()->with([
-                'type' => 'error', "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
+                'type' => 'error',
+                "message" =>  $ex->getMessage() . " at line " . $ex->getLine()
             ]);
         }
     }
